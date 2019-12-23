@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Image;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ImageController extends Controller
 {
+    /**
+     * @var string Upload images path
+     */
+    public const STORAGE_PATH = "public/images"; 
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,12 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        // Get images
+        $images = Image::with("user")->paginate(10);
+
+        $images = $this->convertImages($images);
+
+        return response()->json($images, 200);
     }
 
     /**
@@ -35,7 +49,38 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request
+        $result = Validator::make($request->all(), [
+            'title' => 'required|min:3|max:50',
+            'description'   => 'required|min:10|max:200',
+            'tags'  => 'required|array|min:1|max:5',
+            'tags.*'  => 'min:3|max:10',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2024',
+        ]);
+
+        if (!$result->fails()) {
+
+            // Store the image
+            $filePath = $request->image->store(self::STORAGE_PATH);
+
+            // Create new image
+            $image = new Image($request->only(['title', 'description', 'tags']));
+
+            $image->image = $filePath;
+            $image->image_small = $filePath;
+            $image->user_id = 1;
+
+            // Save iamge into the database
+            $image->save();
+
+            $image = $this->convertImage($image);
+
+            return response()->json($image, 201);
+        } else {
+            return response()->json([
+                'errors' => $result->errors()
+            ], 400);
+        }
     }
 
     /**
@@ -44,9 +89,23 @@ class ImageController extends Controller
      * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function show(Image $image)
+    public function show($id)
     {
-        //
+        /**
+         * Find the image
+         * Or send 404 error
+         */
+        try {
+            $image = Image::with('user')->findOrFail($id);
+
+            $image = $this->convertImage($image);
+
+            return response()->json($image, 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'errors'    => ['Image not found']
+            ], 404);
+        }
     }
 
     /**
@@ -69,7 +128,49 @@ class ImageController extends Controller
      */
     public function update(Request $request, Image $image)
     {
-        //
+        // Validate the request
+        $result = Validator::make($request->all(), [
+            'title' => 'required|min:3|max:50',
+            'description'   => 'required|min:10|max:200',
+            'tags'  => 'required|array|min:1|max:5',
+            'tags.*'  => 'min:3|max:10',
+            'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2024',
+        ]);
+
+        if (!$result->fails()) {
+
+            // Get image file path as a default new file path value
+            $filePath = $image->image;
+
+            // Check if the user uploaded new image
+            if($request->file){
+     
+                // Delete the old image
+                Storage::delete($filePath);
+                // Upload the new image
+                $filePath = $request->file->store(self::STORAGE_PATH);
+            }
+
+            
+            $image->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'tags'  => $request->tags,
+                'image' => $filePath,
+                'image_small'   => $filePath
+            ]);
+
+            // Save changes into database
+            $image->save();
+
+            $image = $this->convertImage($image);
+
+            return response()->json($image, 200);
+        } else {
+            return response()->json([
+                'errors' => $result->errors()
+            ], 400);
+        }
     }
 
     /**
@@ -80,6 +181,45 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        //
+        $image->delete();
+
+        return response()->json([
+            'deleted'   => true
+        ], 200);
+    }
+
+
+    /**
+     * Converting images path and return the object
+     * 
+     * @param \App\Image $images
+     * @return \App\Image $images
+     */
+    public function convertImages($images)
+    {
+        $images->map(function ($i) {
+
+            $i = $this->convertImage($i);
+
+            return $i;
+        });
+
+        return $images;
+    }
+
+    public function convertImage($image)
+    {
+
+        // Get the path of the image
+        $image->image = Storage::url($image->image);
+        $image->image_small = Storage::url($image->image_small);
+
+        // Get the full path for the user image if it exists
+        if ($image->user && $image->user->profile_pic) {
+            $image->user->profile_pic = Storage::url($image->user->profile_pic);
+            $image->user->profile_pic_small = Storage::url($image->user->profile_pic_small);
+        }
+
+        return $image;
     }
 }
