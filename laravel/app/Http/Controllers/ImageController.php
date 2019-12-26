@@ -15,6 +15,10 @@ class ImageController extends Controller
      */
     public const STORAGE_PATH = "public/images"; 
 
+    public function __construct(){
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
 
     /**
      * Display a listing of the resource.
