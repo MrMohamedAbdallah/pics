@@ -99,6 +99,52 @@ class AuthController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
+
+    /**
+     * Change user password
+     * 
+     * @param  \Illuminate\Http\Request $request
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function changePassword(Request $request){
+
+        // Vlidate the request
+        $results = Validator::make($request->all(), [
+            'old_password' => 'required|min:6',
+            'password'  => 'required|min:6|confirmed'
+        ]);
+
+        if( ! $results->fails()){
+
+            // Check the password
+            $user = auth()->user();
+
+            if(Hash::check($request->old_password, $user->password)){ // Change password
+                
+                // Save new password
+                $user->password = Hash::make($request->password);
+                $user->save();
+
+                return response()->json([
+                    'success'   => true
+                ], 200);
+            } else { // Wrong password
+                return response()->json([
+                    'errors'    => [
+                        'old_password'  => 'Old password is wrong'
+                    ]
+                ], 400);
+            }
+        } else {
+            return response()->json([
+                'errors'    => $results->errors()
+            ], 401);
+        }
+
+    }
+
+
     /**
      * Refresh a token.
      *

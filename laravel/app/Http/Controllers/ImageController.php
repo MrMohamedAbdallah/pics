@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Image;
+use App\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,10 +14,11 @@ class ImageController extends Controller
     /**
      * @var string Upload images path
      */
-    public const STORAGE_PATH = "public/images"; 
+    public const STORAGE_PATH = "public/images";
 
-    public function __construct(){
-        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['index', 'show', 'user']]);
     }
 
 
@@ -147,15 +149,15 @@ class ImageController extends Controller
             $filePath = $image->image;
 
             // Check if the user uploaded new image
-            if($request->file){
-     
+            if ($request->file) {
+
                 // Delete the old image
                 Storage::delete($filePath);
                 // Upload the new image
                 $filePath = $request->file->store(self::STORAGE_PATH);
             }
 
-            
+
             $image->update([
                 'title' => $request->title,
                 'description' => $request->description,
@@ -225,5 +227,37 @@ class ImageController extends Controller
         }
 
         return $image;
+    }
+
+
+
+    /**
+     * User profile uploaded images
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function user($id)
+    {
+
+        // Check if user exists
+        try {
+            
+            $user = User::findOrFail($id);
+
+            // Get iamges
+            $images = $user->images()->paginate();
+
+            return response()->json([
+                'user'  => $user,
+                'images'    => $images
+            ],200);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'errors'    => [
+                    'Not Found'
+                ]
+            ], 404);
+        }
     }
 }

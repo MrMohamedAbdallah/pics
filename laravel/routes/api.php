@@ -15,6 +15,9 @@ use Illuminate\Http\Request;
 
 Route::resource('/images', 'ImageController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
+Route::get("/user/{id}", "ImageController@user")->name("user");
+
+
 
 Route::group([
     'prefix' => 'auth'
@@ -23,6 +26,7 @@ Route::group([
     Route::post('login', 'AuthController@login');
     Route::post('register', 'AuthController@register');
     Route::post('logout', 'AuthController@logout');
+    Route::post('password', 'AuthController@changePassword');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 });
