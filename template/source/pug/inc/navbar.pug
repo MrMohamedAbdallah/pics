@@ -1,0 +1,28 @@
+nav.navbar.bg-dark
+    .container
+        .row
+                
+            .navbar-brand
+                a(href="/")
+                    img(src="/images/pics_logo.svg")
+            .navbar-icon <i class="fas fa-ellipsis-v"></i>
+            ul.navbar-nav
+                li.mr-auto.form-item
+                    form
+                        input(type="text", placeholder="Search", class="search-input")
+                li
+                    a(href="/login.html") Login
+                li.active
+                    a(href="/register.html") Joing Free
+                li.profile
+                    img.profile-pic(src="/images/user.jpg")
+                    ul.user-menu
+                        li
+                            a(href="/user.html") <i class="fas fa-user"></i> Profile
+                        li
+                            a(href="#") <i class="fas fa-cog"></i> Settings
+                        li
+                            a(href="#") <i class="fas fa-sign-out-alt"></i> Logout
+                        
+                li.active
+                    a(href="/upload.html") <i class="fas fa-cloud-upload-alt"></i> Upload

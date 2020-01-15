@@ -1,0 +1,27 @@
+extends inc/layout.pug
+
+block content
+  section.upload
+    .container
+      .row
+        .col-6.col-md-12
+          form.form
+            +input("Title", "text", "title")
+            +input("Description", "textarea", "title")
+            +input("Tags", "text", "tags")
+            ul.modal-tags
+              -for(let i = 0; i < 5; i++)
+                li
+                  a(href="#") sometag
+        .col-6.col-md-12
+          img.showcase-img(src="/images/placeholder (8).jpg")
+        .col-12
+          div.upload-placeholder
+            .message Something to show to the user
+            .box
+              h1 <i class="fas fa-cloud-upload-alt"></i> Upload Your Photo
+        .col-12
+          .progress
+            .progress-bar
+        .col-12
+          button(type="submit") Upload

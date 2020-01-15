@@ -1,0 +1,76 @@
+$numberOfColumns: 12;
+$gutter: 30px;
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+[class^="col"] {
+  padding-right: $gutter / 2;
+  padding-left: $gutter / 2;
+}
+
+// Break points
+@mixin sm() {
+  @media (max-width: 576px) {
+    @content;
+  }
+}
+
+@mixin md() {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin smr() {
+  @media (min-width: 576px) {
+    @content;
+  }
+}
+
+@mixin mdr() {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+// Container
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  @include smr {
+    max-width: 540px;
+  }
+  @include mdr {
+    max-width: 800px;
+    padding: 0px 10px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    width: (100% / 12) * $i;
+  }
+
+  @include sm {
+    .col-sm-#{$i} {
+      width: (100% / 12) * $i;
+    }
+  }
+
+  @include md {
+    .col-md-#{$i} {
+      width: (100% / 12) * $i;
+    }
+  }
+}
+
+body{
+  @include md{
+    background-color: red;
+  }
+}

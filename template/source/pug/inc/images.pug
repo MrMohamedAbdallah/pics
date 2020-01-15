@@ -1,0 +1,28 @@
+div(class="grid", data-colcade="columns: .grid-col, items: .grid-item")
+  div.grid-col.grid-col--1
+  div.grid-col.grid-col--2
+  div.grid-col.grid-col--3
+
+  -for(let i=1; i <= 13; i++)
+    div.grid-item
+      img(src="/images/placeholder (" + i + ").jpg")
+
+div.modal
+  .overlay
+  i.fas.fa-times
+  .modal-body
+    .container
+      .row
+        .col-12
+          .modal-header
+            .user-info
+              img.user-img(src="/images/user.jpg") 
+              a(href="/user.html").username John Doe 
+            a.download-btn(download, href="/images/placeholder (1).jpg") Download <i class="fas fa-cloud-download-alt"></i>
+          img(class="modal-img", src="/images/placeholder (13).jpg")
+          .modal-footer
+            ul.modal-tags
+              -for(let i = 0; i < 5; i++)
+                li
+                  a(href="#") sometag
+            p.description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur accusamus, libero repellendus qui illo nobis, commodi nemo impedit temporibus neque saepe. Alias quasi cumque rerum ex nulla minima eius harum?

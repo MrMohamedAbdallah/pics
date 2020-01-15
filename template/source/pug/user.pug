@@ -1,0 +1,19 @@
+extends inc/layout.pug
+
+block content
+    section.user-section
+        .container
+            .row
+                .col-8.col-md-10.col-sm-12.mx-auto
+                    img.profil-pic(src="/images/user.jpg")
+                    h3.username John Doe
+                    p.user-bio Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid ad cumque itaque nobis distinctio corporis earum dolor eum deleniti temporibus, omnis quos. Cumque fugit iure magnam doloribus eius! Incidunt, qui.
+                    ul.links
+                        li
+                            a(href="#") <i class="fas fa-envelope"></i> hire_john@example.com
+                        li
+                            a(href="#") <i class="fas fa-globe"></i> example.com
+                        li
+                            a(href="#") <i class="fas fa-map-marker-alt"></i> Cairo, Egypt
+    //- Images
+    include inc/images.pug

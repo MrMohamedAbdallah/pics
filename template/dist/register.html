@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/all.min.css"/>
+    <link href="/css/style.min.css" rel="stylesheet"/>
+    <title>Pics</title>
+  </head>
+  <body>
+    <nav class="navbar bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="navbar-brand"><a href="/"><img src="/images/pics_logo.svg"/></a></div>
+          <div class="navbar-icon"><i class="fas fa-ellipsis-v"></i></div>
+          <ul class="navbar-nav">
+            <li class="mr-auto form-item">
+              <form>
+                <input class="search-input" type="text" placeholder="Search"/>
+              </form>
+            </li>
+            <li><a href="/login.html">Login</a></li>
+            <li class="active"><a href="/register.html">Joing Free</a></li>
+            <li class="profile"><img class="profile-pic" src="/images/user.jpg"/>
+              <ul class="user-menu">
+                <li><a href="/user.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+              </ul>
+            </li>
+            <li class="active"><a href="/upload.html"><i class="fas fa-cloud-upload-alt"></i> Upload</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-8 col-md-12 mx-auto">
+          <form class="form shadow-form">
+            <div class="form-group">
+              <label form="#email"> <span class="label">Email</span><small class="error">Email is already used</small>
+              </label>
+              <input class="invalid" type="email" placeholder="" id="email"/>
+            </div>
+            <div class="form-group">
+              <label form="#Name"> <span class="label">Name</span>
+              </label>
+              <input class="valid" type="text" placeholder="" id="Name"/>
+            </div>
+            <div class="form-group">
+              <label form="#password"> <span class="label">Password</span>
+              </label>
+              <input type="password" placeholder="" id="password"/>
+            </div>
+            <div class="form-group">
+              <label form="#confirm_password"> <span class="label">Confirm Password</span>
+              </label>
+              <input type="password" placeholder="" id="confirm_password"/>
+            </div>
+            <div class="form-footer">
+              <button class="submit-btn" type="submit">Login</button><span class="message">have an account? <a href="/register.html">Login</a></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="/js/colcade.js"></script>
+    <script src="/js/app.min.js"></script>
+  </body>
+</html>

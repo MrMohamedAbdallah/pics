@@ -1,0 +1,120 @@
+.search-input {
+  padding: 5px 10px;
+  background-color: color("white");
+  color: color("dark");
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.shadow-form {
+  box-shadow: 0px 0px 10px transparentize($color: #5d6df4, $amount: 0.5);
+  padding: 30px;
+  margin-top: 175px;
+}
+
+.form {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 20px;
+
+  .form-group {
+    margin-bottom: 30px;
+  }
+
+  label {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: color("primary");
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    .error {
+      color: color("danger");
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: color("dark");
+    background-color: color("white");
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px
+      transparentize($color: color("primary"), $amount: 0.5);
+
+    &.valid {
+      box-shadow: 0px 0px 5px
+        transparentize($color: color("success"), $amount: 0);
+    }
+    &.invalid {
+      box-shadow: 0px 0px 5px
+        transparentize($color: color("danger"), $amount: 0.3);
+    }
+  }
+
+  .form-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .message {
+    font-size: 14px;
+    a {
+      display: inline-block;
+      color: color("primary");
+      font-weight: bolder;
+      &:hover {
+        color: darken(color("primary"), 5);
+      }
+    }
+  }
+}
+
+button[type="submit"] {
+  padding: 10px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  color: color("white");
+  background-color: color("primary");
+  border-radius: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: darken(color("primary"), 5);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.showcase-img {
+  width: 100%;
+}
+
+.progress {
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: inset 0px 0px 5px color("primary");
+  .progress-bar {
+    height: 100%;
+    width: 50%;
+    background-color: color("primary");
+  }
+}

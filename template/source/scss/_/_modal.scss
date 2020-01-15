@@ -1,0 +1,134 @@
+.modal {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: calc(100vh - 0px);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+  }
+  display: none;
+  &.show {
+    display: flex;
+  }
+
+  .modal-body {
+    width: 100%;
+    z-index: 20;
+    padding: 20px 0px;
+    .container {
+      padding: 20px 30px;
+      background-color: color("light");
+      border-radius: 10px;
+    }
+    @include sm {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  .modal-img {
+    display: block;
+    max-width: 100%;
+    margin: 20px auto;
+    max-height: 600px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .user-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 200px;
+  }
+
+  .user-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .username {
+    color: color("dark");
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .download-btn {
+    display: block;
+    background-color: color("primary");
+    color: color("white");
+    padding: 5px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    &:hover {
+      background-color: darken(color("primary"), 5);
+      cursor: pointer;
+    }
+    @include sm {
+      width: 100%;
+      margin: 10px 0px;
+    }
+  }
+
+  
+
+  .description {
+    margin: 0px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  .fas.fa-times {
+    position: fixed;
+    top: 20px;
+    left: 10px;
+    color: color("white");
+    font-size: 29px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 21;
+  }
+}
+
+.modal-tags {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  li {
+    margin-right: 10px;
+    background-color: color("primary");
+    color: color("white");
+    font-weight: bold;
+    padding: 5px 20px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    &:hover {
+      cursor: pointer;
+      background-color: darken(color("primary"), 5);
+    }
+    @include sm {
+      padding: 5px 10px;
+    }
+  }
+}

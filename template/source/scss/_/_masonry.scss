@@ -1,0 +1,42 @@
+.grid {
+  @extend .container;
+  display: flex;
+  margin-top: 50px;
+  @include sm {
+    padding: 0px 15px;
+  }
+}
+
+.grid-col {
+  flex-grow: 1;
+  margin-right: 15px;
+}
+
+/* hide two middle */
+.grid-col--2,
+.grid-col--3 {
+  display: none;
+}
+
+.grid-col--2 {
+  @include mdr {
+    display: block;
+  }
+} /* show column 2 */
+
+@media (min-width: 1200px) {
+  .grid-col--3 {
+    display: block;
+  }
+}
+
+
+.grid-item {
+  overflow: hidden;
+  margin-bottom: 30px;
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px !important;
+  }
+}

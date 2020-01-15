@@ -1,0 +1,25 @@
+include ../mixins/form.pug
+
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        //- Google fonts
+        link(href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap", rel="stylesheet")
+        //- Fontawesome
+        link(rel="stylesheet", href="/css/all.min.css")
+        //- Style
+        link(href="/css/style.min.css", rel="stylesheet")
+        title Pics
+    body
+        //- navbar
+        include navbar.pug
+
+        block content
+
+        block footer
+        
+        script(src="/js/colcade.js")
+        script(src="/js/app.min.js")

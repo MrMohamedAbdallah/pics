@@ -1,0 +1,15 @@
+extends inc/layout.pug
+
+block content
+    .container
+        .row
+            div.col-8.col-md-12.mx-auto
+                form.form.shadow-form
+                    +input("Email", "email", "email", "", "Email is already used", "invalid")
+                    +input("Name", "text", "Name", "", "", "valid")
+                    +input("Password", "password", "password")
+                    +input("Confirm Password", "password", "confirm_password")
+                    .form-footer
+                        button.submit-btn(type="submit") Login
+                        span.message have an account? 
+                            a(href="/register.html") Login

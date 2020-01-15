@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=, initial-scale=1.0")
-        meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title Document
-    body
-        
+extends inc/layout.pug
+
+block content
+    header(style="background-image: url('/images/bg.jpeg');")
+        .overlay
+        .row
+            h1.col-8.col-sm-12.mx-auto The Best Free Stock Photos In The World
+            form.col-8.col-sm-12.mx-auto
+                input(type="text", placeholder="Search", class="search-input")
+
+    include inc/images.pug

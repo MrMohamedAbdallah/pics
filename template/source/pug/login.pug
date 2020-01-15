@@ -1,0 +1,13 @@
+extends inc/layout.pug
+
+block content
+    .container
+        .row
+            div.col-8.col-md-12.mx-auto
+                form.form.shadow-form
+                    +input("Email", "email", "email")
+                    +input("Password", "password", "password")
+                    .form-footer
+                        button.submit-btn(type="submit") Login
+                        span.message Don't have an account? 
+                            a(href="/register.html") Register

@@ -1,0 +1,13 @@
+mixin input(label, type, name, ph="", error="", className="")
+    div.form-group
+        label(form="#" + name) 
+            span.label #{label}
+            -if(error)
+                small.error #{error}
+        case type
+            when "text"
+            when "email"
+            when "password"
+                input(type=type, class=className, placeholder=ph, id=name)
+            when "textarea"
+                textarea(name=name, cols="30", rows="10", class=className, placeholder=ph, id=name)

@@ -2,9 +2,91 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/all.min.css"/>
+    <link href="/css/style.min.css" rel="stylesheet"/>
+    <title>Pics</title>
   </head>
-  <body></body>
+  <body>
+    <nav class="navbar bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="navbar-brand"><a href="/"><img src="/images/pics_logo.svg"/></a></div>
+          <div class="navbar-icon"><i class="fas fa-ellipsis-v"></i></div>
+          <ul class="navbar-nav">
+            <li class="mr-auto form-item">
+              <form>
+                <input class="search-input" type="text" placeholder="Search"/>
+              </form>
+            </li>
+            <li><a href="/login.html">Login</a></li>
+            <li class="active"><a href="/register.html">Joing Free</a></li>
+            <li class="profile"><img class="profile-pic" src="/images/user.jpg"/>
+              <ul class="user-menu">
+                <li><a href="/user.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+              </ul>
+            </li>
+            <li class="active"><a href="/upload.html"><i class="fas fa-cloud-upload-alt"></i> Upload</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header style="background-image: url('/images/bg.jpeg');">
+      <div class="overlay"></div>
+      <div class="row">
+        <h1 class="col-8 col-sm-12 mx-auto">The Best Free Stock Photos In The World</h1>
+        <form class="col-8 col-sm-12 mx-auto">
+          <input class="search-input" type="text" placeholder="Search"/>
+        </form>
+      </div>
+    </header>
+    <div class="grid" data-colcade="columns: .grid-col, items: .grid-item">
+      <div class="grid-col grid-col--1"></div>
+      <div class="grid-col grid-col--2"></div>
+      <div class="grid-col grid-col--3"></div>
+      <div class="grid-item"><img src="/images/placeholder (1).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (2).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (3).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (4).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (5).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (6).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (7).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (8).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (9).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (10).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (11).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (12).jpg"/></div>
+      <div class="grid-item"><img src="/images/placeholder (13).jpg"/></div>
+    </div>
+    <div class="modal">
+      <div class="overlay"></div><i class="fas fa-times"></i>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="modal-header">
+                <div class="user-info"><img class="user-img" src="/images/user.jpg"/><a class="username" href="/user.html">John Doe </a></div><a class="download-btn" download="download" href="/images/placeholder (1).jpg">Download <i class="fas fa-cloud-download-alt"></i></a>
+              </div><img class="modal-img" src="/images/placeholder (13).jpg"/>
+              <div class="modal-footer">
+                <ul class="modal-tags">
+                  <li><a href="#">sometag</a></li>
+                  <li><a href="#">sometag</a></li>
+                  <li><a href="#">sometag</a></li>
+                  <li><a href="#">sometag</a></li>
+                  <li><a href="#">sometag</a></li>
+                </ul>
+                <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur accusamus, libero repellendus qui illo nobis, commodi nemo impedit temporibus neque saepe. Alias quasi cumque rerum ex nulla minima eius harum?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/colcade.js"></script>
+    <script src="/js/app.min.js"></script>
+  </body>
 </html>
