@@ -1,0 +1,40 @@
+<p>navbar works!</p>
+<nav class="navbar bg-dark" #navbar>
+    <div class="container">
+      <div class="row">
+        <div class="navbar-brand">
+          <a routerLink="/"><img src="assets/images/pics_logo.svg"/></a>
+        </div>
+        <div class="navbar-icon" (click)="toggleMenu()"><i class="fas fa-ellipsis-v"></i></div>
+        <ul class="navbar-nav">
+          <li class="mr-auto form-item">
+            <form>
+              <input class="search-input" type="text" placeholder="Search" />
+            </form>
+          </li>
+          <li *ngIf="!logged"><a routerLink="/login">Login</a></li>
+          <li class="active" *ngIf="!logged"><a routerLink="/register">Joing Free</a></li>
+          <li class="profile" *ngIf="logged">
+            <img class="profile-pic" src="assets/images/user.jpg" />
+            <ul class="user-menu">
+              <li>
+                <a href="/user.html"><i class="fas fa-user"></i> Profile</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+              </li>
+            </ul>
+          </li>
+          <li class="active" *ngIf="logged">
+            <a href="/upload.html"
+              ><i class="fas fa-cloud-upload-alt"></i> Upload</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
