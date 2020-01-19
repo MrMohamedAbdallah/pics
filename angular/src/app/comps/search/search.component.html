@@ -1,0 +1,8 @@
+<div *ngIf="query">
+    <div class="container">
+        <h1 class="search-header">"{{ query }}" Photos</h1>
+      </div>
+      <!-- Images -->
+      <!-- The query will be added when the search functionality finished in the backend -->
+      <app-images url="http://pics.test/api/images"></app-images>
+</div>

@@ -7,6 +7,12 @@ import { NavbarComponent } from './comps/navbar/navbar.component';
 import { HomeComponent } from './comps/home/home.component';
 import { LoginComponent } from './comps/auth/login/login.component';
 import { RegisterComponent } from './comps/auth/register/register.component';
+import { ImagesComponent } from './comps/images/images.component';
+
+import { HttpClientModule } from "@angular/common/http";
+import { BottomDirective } from './directives/bottom.directive';
+import { SearchComponent } from './comps/search/search.component';
+import { NotFoundComponent } from './comps/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +20,16 @@ import { RegisterComponent } from './comps/auth/register/register.component';
     NavbarComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ImagesComponent,
+    BottomDirective,
+    SearchComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
