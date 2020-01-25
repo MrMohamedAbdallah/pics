@@ -12,7 +12,10 @@ export class SearchInputComponent implements OnInit {
 
   searchForm: FormGroup;
   
-  constructor(private _router: Router) { }
+  constructor(private _router: Router) { 
+
+    this._router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+  }
 
   ngOnInit() {
 
