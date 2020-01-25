@@ -8,9 +8,7 @@
         <div class="navbar-icon" (click)="toggleMenu()"><i class="fas fa-ellipsis-v"></i></div>
         <ul class="navbar-nav">
           <li class="mr-auto form-item">
-            <form>
-              <input class="search-input" type="text" placeholder="Search" />
-            </form>
+            <app-search-input></app-search-input>
           </li>
           <li *ngIf="!logged"><a routerLink="/login">Login</a></li>
           <li class="active" *ngIf="!logged"><a routerLink="/register">Joing Free</a></li>

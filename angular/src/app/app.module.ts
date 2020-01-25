@@ -13,6 +13,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { BottomDirective } from './directives/bottom.directive';
 import { SearchComponent } from './comps/search/search.component';
 import { NotFoundComponent } from './comps/not-found/not-found.component';
+import { SearchInputComponent } from './comps/forms/search-input/search-input.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +25,13 @@ import { NotFoundComponent } from './comps/not-found/not-found.component';
     ImagesComponent,
     BottomDirective,
     SearchComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SearchInputComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
