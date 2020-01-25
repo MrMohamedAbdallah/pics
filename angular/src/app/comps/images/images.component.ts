@@ -15,6 +15,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
   imagesArray: string[] = [];
   colc: Colcade;
   loading: boolean = false; // Loading images state
+  searched: boolean = false;
 
   constructor(private _http: HttpClient) { }
 
@@ -43,16 +44,19 @@ export class ImagesComponent implements OnInit, AfterViewInit {
     // API call
     this._http.get(url).subscribe((res: any)=>{
       this.loading = false;
+      this.searched = true;
+
       this.nextURL = res.next_page_url;
       let imagesArray: any[] = res.data;
-  
-      this.imagesArray.concat(imagesArray);
-  
+      
+      this.imagesArray = this.imagesArray.concat(imagesArray);
+
       for(let iamge of imagesArray){
         this.addImage("http://pics.test" + iamge.image_small);
       }
     }, ()=>{
       this.loading = false;
+      this.searched = true;
     });
   }
 

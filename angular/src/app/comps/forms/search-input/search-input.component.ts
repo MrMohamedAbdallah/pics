@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-search-input',
   templateUrl: './search-input.component.html',
@@ -10,16 +12,19 @@ export class SearchInputComponent implements OnInit {
 
   searchForm: FormGroup;
   
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit() {
 
     this.searchForm = new FormGroup({
       query: new FormControl(null)
     });
+  }
 
-    this.searchForm.valueChanges.subscribe(console.log);
-    
+  submitSearch(){
+    if(this.searchForm.value.query.trim()){
+      this._router.navigate(['/search', this.searchForm.value.query]);
+    }
   }
 
 }

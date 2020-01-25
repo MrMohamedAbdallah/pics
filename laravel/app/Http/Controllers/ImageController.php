@@ -280,6 +280,8 @@ class ImageController extends Controller
             // Get user data
             $images->load('user');
 
+            $images = $this->convertImages($images);
+
             return response()->json($images, 200);
         } else {    // It Fails :(
             return response()->json([
