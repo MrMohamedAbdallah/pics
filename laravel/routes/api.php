@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::resource('/images', 'ImageController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
 Route::get("/user/{id}", "ImageController@user")->name("user");
+Route::get("/search", "ImageController@search")->name("search");
 
 
 

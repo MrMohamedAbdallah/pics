@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Image extends Model
 {
+
+    use Searchable;
+
     protected   $table = "images",  // Default
                 $primaryKey = "id",     // Default
                 $fillable   = [

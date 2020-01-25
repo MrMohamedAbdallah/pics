@@ -18,7 +18,7 @@ class ImageController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['index', 'show', 'user']]);
+        $this->middleware('auth:api', ['except' => ['index', 'show', 'user', 'search']]);
     }
 
 
@@ -259,5 +259,33 @@ class ImageController extends Controller
                 ]
             ], 404);
         }
+    }
+
+    /**
+     * Search records using algolia
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    function search(Request $request){
+
+        $results = Validator::make($request->all(), [
+            'query' => 'required|max:50'
+        ]);
+
+        if(!$results->fails()){
+
+            $images = Image::search($request->get('query'))->paginate();
+            
+            // Get user data
+            $images->load('user');
+
+            return response()->json($images, 200);
+        } else {    // It Fails :(
+            return response()->json([
+                'errors'    => $results->errors()
+            ], 400);
+        }
+
     }
 }
