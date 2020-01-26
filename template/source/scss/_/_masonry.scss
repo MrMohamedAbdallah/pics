@@ -34,9 +34,62 @@
 .grid-item {
   overflow: hidden;
   margin-bottom: 30px;
-  img {
+  position: relative;
+  & > img {
     width: 100%;
     height: auto;
     border-radius: 10px !important;
+    cursor: pointer;
   }
+
+  .card-info{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 20px 10px 10px 10px;
+    background-image: linear-gradient(to top, color("black"), transparentize(color("black"), 1));
+    display: none;
+    .user-info{
+      display: flex;
+      align-items: center;
+      img{
+        $size: 50px;
+        width: $size;
+        height: $size;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+        margin-right: 10px;
+      }
+
+      a{
+        text-decoration: none;
+        font-size: 18px;
+        color: color('white');
+        font-weight: bolder;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+    .download-btn{
+      cursor: pointer;
+    }
+    i{
+      font-size: 20px;
+      color: color('white');
+    }
+
+  }
+
+  &:hover{
+    .card-info{
+      display: flex;
+    }
+  }
+
 }

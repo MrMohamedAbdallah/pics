@@ -3,6 +3,11 @@
   <div class="grid-col grid-col--2"></div>
   <div class="grid-col grid-col--3"></div>
 </div>
+<app-image 
+  class="grid-item img-card"
+  *ngFor="let image of imagesArray; let i = index" 
+  [image]="image"
+  (loaded)="load($event)"></app-image>
 
 <div *ngIf="searched && imagesArray.length == 0">
   <h1 style="text-align: center;">No Results</h1>

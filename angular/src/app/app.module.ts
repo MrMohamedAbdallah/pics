@@ -15,6 +15,7 @@ import { BottomDirective } from './directives/bottom.directive';
 import { SearchComponent } from './comps/search/search.component';
 import { NotFoundComponent } from './comps/not-found/not-found.component';
 import { SearchInputComponent } from './comps/forms/search-input/search-input.component';
+import { ImageComponent } from './comps/images/image/image.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SearchInputComponent } from './comps/forms/search-input/search-input.co
     BottomDirective,
     SearchComponent,
     NotFoundComponent,
-    SearchInputComponent
+    SearchInputComponent,
+    ImageComponent,
   ],
   imports: [
     BrowserModule,

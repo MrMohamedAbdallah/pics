@@ -51,8 +51,8 @@ export class ImagesComponent implements OnInit, AfterViewInit {
       
       this.imagesArray = this.imagesArray.concat(imagesArray);
 
-      for(let iamge of imagesArray){
-        this.addImage("http://pics.test" + iamge.image_small);
+      for(let image of imagesArray){
+        // this.addImage(image);
       }
     }, ()=>{
       this.loading = false;
@@ -67,16 +67,46 @@ export class ImagesComponent implements OnInit, AfterViewInit {
  
 
 
-  addImage(url){
+  addImage(image: any){
+      /*
+
+        <div class="card-info">
+          <div class="user-info">
+            <img src="/images/user.jpg"/>
+            <a href="#">John Doe</a>
+          </div>
+          <div class="download-btn">
+            <i class="fas fa-arrow-down"></i>
+          </div>
+        </div>
+      */
       // Create image element with lazy load "loading in the background first"
-      let div = document.createElement("div");  // Container for the iamge
-      div.className = "grid-item";  
-      let img = document.createElement("img");  // Image element 
+      let div = this.createDiv("grid-item img-card");  // Container for the iamge
+  
+      let img = document.createElement("img");  // Image element
+      let cardInfo = this.createDiv("card-info");
+      let userInfo = this.createDiv("card-info");
+      let downBtn = this.createDiv("download-btn");
+      let userImage = document.createElement("img");
+      userImage.src = image.user.profile_pic_small ? image.user.profile_pic_small : '/assets/images/user.png';
+      
       // Will trigger after the image is loaded in the background
       img.onload = ()=>{
         div.appendChild(img);
         this.colc.append(div);  // Appending the image container to the grid
       };
-      img.src = url;  // Assign the source of the image to the url
+      img.src = "http://pics.test/" + image.image_small;  // Assign the source of the image to the url
   }
+
+  createDiv(className = ""){
+    let div = document.createElement("div");
+    div.className = className;
+    return div;
+  }
+
+  load(div: any){
+    // console.log(div);
+    this.colc.append(div);
+  }
+
 }
