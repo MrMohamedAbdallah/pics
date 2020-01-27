@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthService {
   access_token: string = null;
   expire: number = null;
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private _router: Router) { }
 
 
   login(email: string, password: string){
@@ -50,6 +51,9 @@ export class AuthService {
     this.expire = parseInt(expire);
 
     this.isLogged = true;
+
+    // Redirect the user to home page
+    this._router.navigate(['/']);
   }
 
 }
