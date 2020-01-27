@@ -16,6 +16,7 @@ import { SearchComponent } from './comps/search/search.component';
 import { NotFoundComponent } from './comps/not-found/not-found.component';
 import { SearchInputComponent } from './comps/forms/search-input/search-input.component';
 import { ImageComponent } from './comps/images/image/image.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { ImageComponent } from './comps/images/image/image.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
