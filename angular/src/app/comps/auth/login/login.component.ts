@@ -38,10 +38,10 @@ export class LoginComponent implements OnInit {
     this.lastPassword = password;
 
     this._auth.login(email, password).subscribe(
-      (data)=>{
+      (data: any)=>{
         this._auth.storeToken(data.access_token, data.expires_in);
       },
-      (err)=>{
+      (err: any)=>{
         if(err.status == 401){
           this.wrongInfo = true;
         }

@@ -41,10 +41,10 @@ export class RegisterComponent implements OnInit {
     this.lastEmail = email;
 
     this._auth.register(email, name, password, password_confirmation).subscribe(
-      (data)=>{
+      (data: any)=>{
         this._auth.storeToken(data.access_token, data.expires_in);
       },
-      (error)=>{
+      (error: any)=>{
         if(error.status == 401){
           if(error.error.errors.email){
             this.emailIsUsed = true;

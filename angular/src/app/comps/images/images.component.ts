@@ -10,6 +10,7 @@ import {
 } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import * as Colcade from "colcade";
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: "app-images",
@@ -28,7 +29,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
   @Input("isProfile") isProfile: boolean = false; // If we are in the profile page
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private _imageService: ImageService) {}
 
   ngOnInit() {}
 
@@ -126,4 +127,6 @@ export class ImagesComponent implements OnInit, AfterViewInit {
     // console.log(div);
     this.colc.append(div);
   }
+
+
 }

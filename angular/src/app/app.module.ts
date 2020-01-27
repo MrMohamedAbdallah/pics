@@ -18,6 +18,8 @@ import { SearchInputComponent } from './comps/forms/search-input/search-input.co
 import { ImageComponent } from './comps/images/image/image.component';
 import { AuthService } from './services/auth.service';
 import { UserComponent } from './comps/user/user.component';
+import { ModalComponent } from './comps/images/modal/modal.component';
+import { ImageService } from './services/image.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { UserComponent } from './comps/user/user.component';
     SearchInputComponent,
     ImageComponent,
     UserComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import { UserComponent } from './comps/user/user.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

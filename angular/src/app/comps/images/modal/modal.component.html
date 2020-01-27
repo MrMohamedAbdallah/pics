@@ -1,0 +1,36 @@
+<!-- Image Modal -->
+<div class="modal" *ngIf="image" [class.show]="showModal">
+    <div class="overlay" (click)="hideModal()"></div>
+    <i class="fas fa-times" (click)="hideModal()"></i>
+    <div class="modal-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="modal-header">
+              <div class="user-info">
+                <img class="user-img" [src]="image.user.profile_pic_small" />
+                <a
+                    class="username"
+                    [routerLink]="['/user', image.user.id]"
+                    >{{ image.user.name }}</a>
+              </div>
+              <a
+                class="download-btn"
+                download="download"
+                [href]="image.image"
+                >Download <i class="fas fa-cloud-download-alt"></i
+              ></a>
+            </div>
+            <img class="modal-img" [src]="image.image" />
+            <div class="modal-footer">
+              <ul class="modal-tags">
+                <li *ngFor="let tag of image.tags"><a href="#">{{ tag }}</a></li>
+              </ul>
+              <p class="description">{{ image.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -16,47 +16,5 @@
 <!-- Bottom trigger -->
 <div (appBottom)="loadNext()" style="min-height: 50px"></div>
 
-<!-- Image Modal -->
-<div class="modal">
-  <div class="overlay"></div>
-  <i class="fas fa-times"></i>
-  <div class="modal-body">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="modal-header">
-            <div class="user-info">
-              <img class="user-img" src="assets/images/user.jpg" /><a
-                class="username"
-                href="/user.html"
-                >John Doe
-              </a>
-            </div>
-            <a
-              class="download-btn"
-              download="download"
-              href="assets/images/placeholder (1).jpg"
-              >Download <i class="fas fa-cloud-download-alt"></i
-            ></a>
-          </div>
-          <img class="modal-img" src="assets/images/placeholder (13).jpg" />
-          <div class="modal-footer">
-            <ul class="modal-tags">
-              <li><a href="#">sometag</a></li>
-              <li><a href="#">sometag</a></li>
-              <li><a href="#">sometag</a></li>
-              <li><a href="#">sometag</a></li>
-              <li><a href="#">sometag</a></li>
-            </ul>
-            <p class="description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Consequuntur accusamus, libero repellendus qui illo nobis, commodi
-              nemo impedit temporibus neque saepe. Alias quasi cumque rerum ex
-              nulla minima eius harum?
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Modal -->
+<app-modal></app-modal>
