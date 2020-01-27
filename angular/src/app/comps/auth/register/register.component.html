@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
       <div class="col-8 col-md-12 mx-auto">
-        <form class="form shadow-form" [formGroup]="registerForm" (ngSubmit)="register()">
+        <form class="form shadow-form" [formGroup]="registerForm" (ngSubmit)="register()" style="margin-top: 100px;">
           <div class="form-group">
             <label form="#email">
                <span class="label">Email</span>
@@ -31,7 +31,7 @@
           <div class="form-footer">
             <button class="submit-btn" type="submit" [disabled]="!registerForm.valid || !checkPassword() ">Register</button>
             <span class="message">
-              have an account? <a href="/register.html">Login</a>
+              have an account? <a routerLink="/login">Login</a>
             </span>
           </div>
         </form>
