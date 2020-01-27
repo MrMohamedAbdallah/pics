@@ -11,7 +11,16 @@ export class AuthService {
   access_token: string = null;
   expire: number = null;
 
-  constructor(private _http: HttpClient, private _router: Router) { }
+  constructor(private _http: HttpClient, private _router: Router) {
+      this.access_token = localStorage.getItem('access_token');
+      this.expire = localStorage.getItem('expire');
+
+      if(this.access_token){
+        if(this.expire < Date.now()){
+          this.isLogged = true;
+        }
+      }
+   }
 
 
   login(email: string, password: string){
