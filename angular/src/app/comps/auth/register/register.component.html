@@ -1,16 +1,22 @@
 <div class="container">
     <div class="row">
       <div class="col-8 col-md-12 mx-auto">
-        <form class="form shadow-form" [formGroup]="registerForm">
+        <form class="form shadow-form" [formGroup]="registerForm" (ngSubmit)="register()">
           <div class="form-group">
-            <label form="#email"> <span class="label">Email</span><small class="error">Email is already used</small>
+            <label form="#email">
+               <span class="label">Email</span>
+               <small class="error" *ngIf="emailIsUsed">This email is already used</small>
             </label>
-            <input class="invalid" type="email" placeholder="" id="email" formControlName="email"/>
+            <input  
+              type="email" 
+              id="email" 
+              formControlName="email"
+              [class.invalid]="emailIsUsed"/>
           </div>
           <div class="form-group">
             <label form="#name"> <span class="label">Name</span>
             </label>
-            <input class="valid" type="text" placeholder="" id="name" formControlName="name"/>
+            <input type="text" placeholder="" id="name" formControlName="name"/>
           </div>
           <div class="form-group">
             <label form="#password"> <span class="label">Password</span>
@@ -23,7 +29,10 @@
             <input type="password" placeholder="" id="confirm_password" formControlName="password_confirmation"/>
           </div>
           <div class="form-footer">
-            <button class="submit-btn" type="submit">Login</button><span class="message">have an account? <a href="/register.html">Login</a></span>
+            <button class="submit-btn" type="submit" [disabled]="!registerForm.valid || !checkPassword() ">Register</button>
+            <span class="message">
+              have an account? <a href="/register.html">Login</a>
+            </span>
           </div>
         </form>
       </div>

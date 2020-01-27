@@ -20,11 +20,17 @@ export class AuthService {
       email: email,
       password: password
     }, {headers: headers});
-
+    
   }
+  
+  register(email, name, password, password_confirmation){
+    let headers = new HttpHeaders().set("Accept", "application/json");
 
-  register(){
-
+    return this._http.post("http://pics.test/api/auth/register", {
+      email, name, password, password_confirmation
+    }, {
+      headers: headers
+    });
   }
   
   /**
