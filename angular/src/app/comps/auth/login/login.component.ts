@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   wrongInfo: boolean = false; // will be true when email and password are worng
 
+  lastEmail: string = null;
+  lastPassword: string = null;
   constructor(private _auth: AuthService) { }
 
   ngOnInit() {
@@ -23,8 +25,17 @@ export class LoginComponent implements OnInit {
 
 
   login(){
+
     let email = this.loginForm.value.email;
     let password = this.loginForm.value.password;
+
+    // Abort if the user didn't add new information
+    if(this.lastEmail == email && this.lastPassword == password){
+      return;
+    }
+
+    this.lastEmail = email;
+    this.lastPassword = password;
 
     this._auth.login(email, password).subscribe(
       (data)=>{
