@@ -15,6 +15,7 @@ export class ImageComponent implements OnInit {
 
   ngOnInit() {
     this.image.image_small = "http://pics.test/" + this.image.image_small;
+
     this.image.user.profile_pic_small = this.image.user.profile_pic_small ? "http://pics.test/" + this.image.user.profile_pic_small : "/assets/images/user.png";
 
     this.img.nativeElement.onload = ()=>{

@@ -247,6 +247,8 @@ class ImageController extends Controller
             // Get iamges
             $images = $user->images()->paginate();
 
+            $images = $this->convertImages($images);
+
             return response()->json([
                 'user'  => $user,
                 'images'    => $images

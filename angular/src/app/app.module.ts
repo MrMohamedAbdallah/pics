@@ -17,6 +17,7 @@ import { NotFoundComponent } from './comps/not-found/not-found.component';
 import { SearchInputComponent } from './comps/forms/search-input/search-input.component';
 import { ImageComponent } from './comps/images/image/image.component';
 import { AuthService } from './services/auth.service';
+import { UserComponent } from './comps/user/user.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AuthService } from './services/auth.service';
     NotFoundComponent,
     SearchInputComponent,
     ImageComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

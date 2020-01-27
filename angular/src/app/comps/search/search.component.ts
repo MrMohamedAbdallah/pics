@@ -14,7 +14,6 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.query = this._activatedRoute.snapshot.paramMap.get("query");
-    console.log(this.query);
   }
 
 }

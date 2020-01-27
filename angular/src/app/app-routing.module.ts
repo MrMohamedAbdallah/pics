@@ -5,6 +5,7 @@ import { LoginComponent } from './comps/auth/login/login.component';
 import { RegisterComponent } from './comps/auth/register/register.component';
 import { NotFoundComponent } from './comps/not-found/not-found.component';
 import { SearchComponent } from './comps/search/search.component';
+import { UserComponent } from './comps/user/user.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "search/:query", component: SearchComponent},
+  {path: "user/:id", component: UserComponent},
   {path: "404", component: NotFoundComponent},
   {path: "**", redirectTo: "404"},
 ];

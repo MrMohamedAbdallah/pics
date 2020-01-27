@@ -1,0 +1,18 @@
+<section class="user-section" *ngIf="user">
+    <div class="container">
+      <div class="row">
+        <div class="col-8 col-md-10 col-sm-12 mx-auto"><img class="profil-pic" [src]="user.profile_pic_small"/>
+          <h3 class="username">{{ user.name }}</h3>
+          <!-- <p class="user-bio">{{ user.bio }}</p> -->
+          <ul class="links">
+            <!-- <li><a href="#"><i class="fas fa-envelope"></i> {{ user.email  }}</a></li> -->
+            <!-- <li><a href="#"><i class="fas fa-globe"></i> example.com</a></li> -->
+            <!-- <li><a href="#"><i class="fas fa-map-marker-alt"></i> Cairo, Egypt</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Images Grid -->
+  <app-images [url]="'http://pics.test/api/user/' + userId" [isProfile]="true" (user)="getUser($event)"></app-images>
