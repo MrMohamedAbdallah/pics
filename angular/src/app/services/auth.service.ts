@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -11,13 +11,18 @@ export class AuthService {
   access_token: string = null;
   expire: number = null;
 
+  user: any = null; // User object
+  userObserver: EventEmitter<any> = new EventEmitter<any>(); // Emit an event when user value changes
+
   constructor(private _http: HttpClient, private _router: Router) {
       this.access_token = localStorage.getItem('access_token');
       this.expire = parseInt(localStorage.getItem('expire'));
-
+      
       if(this.access_token){
         if(this.expire < Date.now()){
           this.isLogged = true;
+          this.user = JSON.parse(localStorage.getItem('user'));
+          this.userObserver.emit(this.user);
         }
       }
    }
@@ -61,8 +66,48 @@ export class AuthService {
 
     this.isLogged = true;
 
+    // Getting user information
+    this.getUser();
+    
     // Redirect the user to home page
     this._router.navigate(['/']);
+
+  }
+
+  /**
+   * Get user information from the server and emit an event with it's value
+   */
+  getUser(){
+    if(!this.isLogged){
+      return;
+    }
+    let headers = new HttpHeaders()
+      .set("Accept", "application/json")
+      .set("Authorization", "Bearer " + this.access_token);
+
+    this._http.post("http://pics.test/api/auth/me", {}, {headers: headers})
+        .subscribe((user)=>{
+          this.user = this.convertUser(user);
+          this.userObserver.emit(this.user);  
+          // Store user information on the localstorage
+          localStorage.setItem("user", JSON.stringify(this.user));
+
+          console.log(this.user);
+        },
+        (err)=>{
+          console.error("Get user information error");
+          console.error(err);
+        });
+  }
+
+  /**
+   * Convert user image to default iamge picture if the iamge is not set
+   */
+  convertUser(user){
+    user.profile_pic = user.profile_pic ? user.profile_pic : '/assets/images/user.png';
+    user.profile_pic_small = user.profile_pic_small ? user.profile_pic_small : '/assets/images/user.png';
+    
+    return user;
   }
 
 }
