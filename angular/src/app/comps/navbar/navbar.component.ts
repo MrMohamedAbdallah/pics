@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
   logged: boolean = false;   // Logged state indicator
   user: any = null;
   @ViewChild('navbar', {static: false}) navbar: ElementRef;  // Navbar element
+  @ViewChild("userMenu", {static: false}) userMenu: ElementRef;
 
   constructor(private _auth: AuthService) { }
 
@@ -34,6 +35,18 @@ export class NavbarComponent implements OnInit {
       navbar.classList.remove("show");
     } else {
       navbar.classList.add("show");
+    }
+  }
+
+  /**
+   * Display user menu
+   */
+  showMenu(){
+    let userMenu = this.userMenu.nativeElement;
+    if(userMenu.classList.contains("show-menu")){
+      userMenu.classList.remove("show-menu");
+    } else {
+      userMenu.classList.add("show-menu");
     }
   }
 
