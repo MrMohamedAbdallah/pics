@@ -13,7 +13,7 @@ export class AuthService {
 
   constructor(private _http: HttpClient, private _router: Router) {
       this.access_token = localStorage.getItem('access_token');
-      this.expire = localStorage.getItem('expire');
+      this.expire = parseInt(localStorage.getItem('expire'));
 
       if(this.access_token){
         if(this.expire < Date.now()){
