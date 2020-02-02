@@ -106,8 +106,24 @@ export class AuthService {
   convertUser(user){
     user.profile_pic = user.profile_pic ? user.profile_pic : '/assets/images/user.png';
     user.profile_pic_small = user.profile_pic_small ? user.profile_pic_small : '/assets/images/user.png';
-    
+
     return user;
+  }
+
+  /**
+   * Logging the user out
+   */
+  logout(){
+    this.user = null;
+    this.isLogged = false;
+    this.expire = null;
+    this.access_token = null;
+
+    this.userObserver.emit(this.user);
+    localStorage.clear();
+    
+    // Redirect the user to the home page
+    this._router.navigate(['/']);
   }
 
 }

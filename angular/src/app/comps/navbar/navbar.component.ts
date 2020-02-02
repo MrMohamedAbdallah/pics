@@ -17,8 +17,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this._auth.userObserver.subscribe(user => {
+      if(user){
+        this.logged = true;
+      } else {
+        this.logged = false;
+      }
       this.user = user;
-      this.logged = true;
     })
     this.user = this._auth.user;
     this.logged = this._auth.isLogged;
@@ -48,6 +52,10 @@ export class NavbarComponent implements OnInit {
     } else {
       userMenu.classList.add("show-menu");
     }
+  }
+
+  logout(){
+    this._auth.logout();
   }
 
 
