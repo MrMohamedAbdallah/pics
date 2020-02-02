@@ -1,0 +1,46 @@
+<section class="upload">
+    <div class="container">
+      <div class="row">
+        <div class="col-6 col-md-12">
+          <form class="form" [formGroup]="uploadForm">
+            <div class="form-group">
+              <label form="#title"> <span class="label">Title</span>
+              </label>
+              <input type="text" id="title" formControlName="title"/>
+            </div>
+            <div class="form-group">
+              <label form="#title"> <span class="label">Description</span>
+              </label>
+              <textarea name="title" cols="30" rows="10" id="title" formControlName="description"></textarea>
+            </div>
+            <div class="form-group">
+              <label form="#tags"> <span class="label">Tags</span>
+              </label>
+              <input type="text" id="tags"/>
+            </div>
+            <ul class="modal-tags" #tagsBox formArrayName="tags">
+              <li *ngFor="let tag of uploadForm.value.tags">{{ tag }}</li>
+            </ul>
+            <input type="file" #fileInput style="display: none">
+          </form>
+        </div>
+        <div class="col-6 col-md-12"><img class="showcase-img" src="" #img/></div>
+        <div class="col-12">
+          <div class="upload-placeholder">
+            <div class="message" *ngIf="uploadFileError">{{ uploadFileError }}</div>
+            <div class="box" (click)="boxClicked()">
+              <h1><i class="fas fa-cloud-upload-alt"></i> Upload Your Photo</h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-12" *ngIf="uploading">
+          <div class="progress">
+            <div class="progress-bar"></div>
+          </div>
+        </div>
+        <div class="col-12">
+          <button type="submit">Upload</button>
+        </div>
+      </div>
+    </div>
+  </section>

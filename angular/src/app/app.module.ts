@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import { UserComponent } from './comps/user/user.component';
 import { ModalComponent } from './comps/images/modal/modal.component';
 import { ImageService } from './services/image.service';
+import { UploadComponent } from './comps/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ImageService } from './services/image.service';
     ImageComponent,
     UserComponent,
     ModalComponent,
+    UploadComponent,
   ],
   imports: [
     BrowserModule,
