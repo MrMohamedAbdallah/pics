@@ -2,7 +2,7 @@
     <div class="container">
       <div class="row">
         <div class="col-6 col-md-12">
-          <form class="form" [formGroup]="uploadForm">
+          <form class="form" [formGroup]="uploadForm" (ngSubmit)="uploadImage()">
             <div class="form-group">
               <label form="#title"> <span class="label">Title</span>
               </label>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="col-12">
-          <button type="submit">Upload</button>
+          <button type="submit" (click)="uploadImage()">Upload</button>
         </div>
       </div>
     </div>

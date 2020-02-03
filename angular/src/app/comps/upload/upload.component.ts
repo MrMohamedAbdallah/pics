@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-upload',
@@ -19,7 +20,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   tagsError: string = null;
   uploading: boolean = false; // Upload status
 
-  constructor() { }
+  constructor(private _auth: AuthService) { }
 
   ngOnInit() {
     this.uploadForm = new FormGroup({
@@ -120,4 +121,25 @@ export class UploadComponent implements OnInit, AfterViewInit {
     this.tagsError = "";
     (<FormArray>this.uploadForm.get("tags")).removeAt(i);
   }
+
+  /**
+   * Upload the image to the server
+   */
+  uploadImage(){
+    let fd = new FormData();
+    let values = this.uploadForm.value;
+
+    fd.append("title", values.title);
+    fd.append("description", values.description);
+    fd.append("image", values.image);
+    for(let i = 0; i < values.tags.length; i++){
+      fd.append("tags[" + i + "]", values.tags[i]);
+    }
+    
+    this._auth.uploadImage(fd).subscribe(
+      console.log,
+      console.error
+    );
+  }  
+
 }

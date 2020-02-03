@@ -126,4 +126,14 @@ export class AuthService {
     this._router.navigate(['/']);
   }
 
+  uploadImage(values: any){
+    let headers = new HttpHeaders()
+                      .set("Accept", "application/json")
+                      .set("Authorization", "Bearer " + this.access_token); 
+
+    return this._http.post("http://pics.test/api/images", values, {
+      headers: headers
+    });
+  }
+
 }
