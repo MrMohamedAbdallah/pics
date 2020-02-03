@@ -74,7 +74,7 @@ class ImageController extends Controller
 
             $image->image = $filePath;
             $image->image_small = $filePath;
-            $image->user_id = 1;
+            $image->user_id = auth()->user()->id;
 
             // Save iamge into the database
             $image->save();
