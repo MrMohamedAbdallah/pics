@@ -15,11 +15,21 @@
             </div>
             <div class="form-group">
               <label form="#tags"> <span class="label">Tags</span>
+                <small class="error">{{ tagsError }}</small>
               </label>
-              <input type="text" id="tags"/>
+              <input 
+                type="text" 
+                id="tags" 
+                #tagInput 
+                [class.invalid]="tagsError"
+                autocomplete="off"
+                (keyup)="tagValueChanges()"/>
             </div>
             <ul class="modal-tags" #tagsBox formArrayName="tags">
-              <li *ngFor="let tag of uploadForm.value.tags">{{ tag }}</li>
+              <li *ngFor="let tag of uploadForm.value.tags; let i = index;">
+                {{ tag }}
+                <i class="fas fa-times" (click)="removeTag(i)"></i>
+              </li>
             </ul>
             <input type="file" accept="image/*" capture="environment" #fileInput style="display: none">
           </form>

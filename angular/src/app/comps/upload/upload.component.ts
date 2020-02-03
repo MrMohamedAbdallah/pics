@@ -11,10 +11,12 @@ export class UploadComponent implements OnInit, AfterViewInit {
   @ViewChild("fileInput", {static: false}) fileInput: ElementRef;
   @ViewChild("img", {static: false}) image: ElementRef;
   @ViewChild("dropBox", {static: false}) dropBox: ElementRef;
+  @ViewChild("tagInput", {static: false}) tagInput: ElementRef;
 
   uploadForm: FormGroup;
   
   uploadFileError: string = null;
+  tagsError: string = null;
   uploading: boolean = false; // Upload status
 
   constructor() { }
@@ -23,13 +25,9 @@ export class UploadComponent implements OnInit, AfterViewInit {
     this.uploadForm = new FormGroup({
       title: new FormControl(null),
       description: new FormControl(null),
-      tags: new FormArray([
-        new FormControl('natural'),
-        new FormControl('dark')
-      ]),
+      tags: new FormArray([]),
       image: new FormControl(null)
     });
-    this.uploadForm.valueChanges.subscribe(console.log);
   }
   
   ngAfterViewInit(){
@@ -84,4 +82,42 @@ export class UploadComponent implements OnInit, AfterViewInit {
     this.uploadForm.get("image").setValue(file);
   }
 
+  /**
+   * Add tag when user write space
+   */
+  tagValueChanges(){
+    
+    // Get input value
+    let value = this.tagInput.nativeElement.value;
+
+    if(value[value.length - 1] != ' ') return;
+
+    // Remove spacing
+    value = value.trim();
+    let tags = value.split(' ');
+
+    if((<FormArray>this.uploadForm.get("tags")).length >= 5 && tags.length){
+      this.tagInput.nativeElement.value = "";
+      this.tagsError = "Can't add more that 5 tags";
+      return;
+    }
+    this.tagsError = "";
+
+
+
+
+    
+    (<FormArray>this.uploadForm.get("tags")).push(new FormControl(tags[0]));
+
+    this.tagInput.nativeElement.value = "";
+  }
+
+  /**
+   * Remove tag from the tags array
+   * @param i 
+   */
+  removeTag(i: number){
+    this.tagsError = "";
+    (<FormArray>this.uploadForm.get("tags")).removeAt(i);
+  }
 }
