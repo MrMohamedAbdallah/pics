@@ -21,14 +21,14 @@
             <ul class="modal-tags" #tagsBox formArrayName="tags">
               <li *ngFor="let tag of uploadForm.value.tags">{{ tag }}</li>
             </ul>
-            <input type="file" #fileInput style="display: none">
+            <input type="file" accept="image/*" capture="environment" #fileInput style="display: none">
           </form>
         </div>
-        <div class="col-6 col-md-12"><img class="showcase-img" src="" #img/></div>
+        <div class="col-6 col-md-12"><img class="showcase-img" #img/></div>
         <div class="col-12">
           <div class="upload-placeholder">
             <div class="message" *ngIf="uploadFileError">{{ uploadFileError }}</div>
-            <div class="box" (click)="boxClicked()">
+            <div class="box" (click)="boxClicked()" #dropBox>
               <h1><i class="fas fa-cloud-upload-alt"></i> Upload Your Photo</h1>
             </div>
           </div>
