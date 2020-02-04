@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-upload',
@@ -13,6 +14,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   @ViewChild("img", {static: false}) image: ElementRef;
   @ViewChild("dropBox", {static: false}) dropBox: ElementRef;
   @ViewChild("tagInput", {static: false}) tagInput: ElementRef;
+  @ViewChild("bar", {static: false}) bar: ElementRef;
 
   uploadForm: FormGroup;
   
@@ -24,11 +26,12 @@ export class UploadComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.uploadForm = new FormGroup({
-      title: new FormControl(null),
-      description: new FormControl(null),
-      tags: new FormArray([]),
-      image: new FormControl(null)
+      title: new FormControl(null, {validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]}),
+      description: new FormControl(null,  {validators: [Validators.required, Validators.minLength(10), Validators.maxLength(200)]}),
+      tags: new FormArray([],  {validators: [Validators.required, Validators.minLength(3), Validators.maxLength(10)]}),
+      image: new FormControl(null, {validators: [Validators.required]})
     });
+
   }
   
   ngAfterViewInit(){
@@ -36,6 +39,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
     this.fileInput.nativeElement.addEventListener("change", (e: any)=>{
       this.storeFileValue(this.fileInput.nativeElement.files[0]);
     });
+    
 
     // DropBox events
     let box = this.dropBox.nativeElement;
@@ -54,7 +58,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
       
       e.dataTransfer.dropEffect = "copy";
     })
-
+    
   }
 
 
@@ -75,6 +79,13 @@ export class UploadComponent implements OnInit, AfterViewInit {
    */
   storeFileValue(file: File){
     
+    //Validate file size
+    let fileSize = file.size / 1024 / 1024;
+    if(fileSize > 2){
+      this.uploadFileError = "The file must be less than 2MB";
+      return;
+    }
+
     // Create url of the file
     let url = URL.createObjectURL(file);
     this.image.nativeElement.src = url;
@@ -90,12 +101,27 @@ export class UploadComponent implements OnInit, AfterViewInit {
     
     // Get input value
     let value = this.tagInput.nativeElement.value;
+    
 
+    
     if(value[value.length - 1] != ' ') return;
+    
+    if(value.length < 4){
+      this.tagsError = "Tag can't be less than 3 characters long";
+      return;
+    }
+    if(value.length > 11){
+      this.tagsError = "Tag can't be more than 10 characters long";
+      return;
+    }
 
     // Remove spacing
     value = value.trim();
     let tags = value.split(' ');
+
+    if(tags.length > 1) return;
+    
+    
 
     if((<FormArray>this.uploadForm.get("tags")).length >= 5 && tags.length){
       this.tagInput.nativeElement.value = "";
@@ -108,7 +134,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
 
 
     
-    (<FormArray>this.uploadForm.get("tags")).push(new FormControl(tags[0]));
+    (<FormArray>this.uploadForm.get("tags")).push(new FormControl(tags[0], {validators: [Validators.minLength(3), Validators.maxLength(10)]}));
 
     this.tagInput.nativeElement.value = "";
   }
@@ -137,9 +163,40 @@ export class UploadComponent implements OnInit, AfterViewInit {
     }
     
     this._auth.uploadImage(fd).subscribe(
-      console.log,
+      ((event)=>{
+        if(event.type == HttpEventType.UploadProgress){
+          this.uploading = true;
+          console.log(this);
+          this.progressValue((event.loaded / event.total) * 100);
+        } else if (event.type == HttpEventType.Response){
+          this.uploading = false;
+          // Redirect the user to the profile
+          this._auth.profile();
+        }
+      }).bind(this),
       console.error
     );
-  }  
+  }
+
+  
+  /**
+   * Set the progress bar value
+   * 
+   * @param value number
+   */
+  progressValue(value: number){
+    console.log(value);
+    this.bar.nativeElement.style.width = value + "%";
+  }
+
+
+  /**
+   * Return if the input is valid or ont
+   * @param inputName string
+   */
+  isNotValid(inputName: string){
+    return this.uploadForm.get(inputName).invalid && this.uploadForm.get(inputName).touched;
+  }
+
 
 }

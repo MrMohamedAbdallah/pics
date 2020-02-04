@@ -132,8 +132,17 @@ export class AuthService {
                       .set("Authorization", "Bearer " + this.access_token); 
 
     return this._http.post("http://pics.test/api/images", values, {
+      reportProgress: true,
+      observe: 'events',
       headers: headers
     });
+  }
+
+  /**
+   * Redirect the user to the profile
+   */
+  profile(){
+    this._router.navigate(['/user', this.user.id]);
   }
 
 }
