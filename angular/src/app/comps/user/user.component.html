@@ -3,11 +3,10 @@
       <div class="row">
         <div class="col-8 col-md-10 col-sm-12 mx-auto"><img class="profil-pic" [src]="user.profile_pic_small"/>
           <h3 class="username">{{ user.name }}</h3>
-          <!-- <p class="user-bio">{{ user.bio }}</p> -->
+          <p class="user-bio">{{ user.bio }}</p>
           <ul class="links">
-            <!-- <li><a href="#"><i class="fas fa-envelope"></i> {{ user.email  }}</a></li> -->
-            <!-- <li><a href="#"><i class="fas fa-globe"></i> example.com</a></li> -->
-            <!-- <li><a href="#"><i class="fas fa-map-marker-alt"></i> Cairo, Egypt</a></li> -->
+            <li *ngIf="user.email"><a><i class="fas fa-envelope"></i> {{ user.email  }}</a></li> 
+            <li *ngIf="user.website"><a><i class="fas fa-globe"></i> {{ user.website }}</a></li> 
           </ul>
         </div>
       </div>
