@@ -85,7 +85,12 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        $user = auth()->user();
+        if($user->profile_pic){
+            $user->profile_pic = Storage::url($user->profile_pic);
+            $user->profile_pic_small = $user->profile_pic;
+        }
+        return response()->json($user);
     }
 
     /**

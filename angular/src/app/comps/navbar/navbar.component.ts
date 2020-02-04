@@ -19,12 +19,14 @@ export class NavbarComponent implements OnInit {
     this._auth.userObserver.subscribe(user => {
       if(user){
         this.logged = true;
+        this.getUserImage();
       } else {
         this.logged = false;
       }
       this.user = user;
     })
     this.user = this._auth.user;
+    this.getUserImage();
     this.logged = this._auth.isLogged;
   }
 
@@ -58,5 +60,11 @@ export class NavbarComponent implements OnInit {
     this._auth.logout();
   }
 
+  getUserImage(){
+    if(this.user.profile_pic && this.user.profile_pic != '/assets/images/user.png'){
+      this.user.profile_pic = "http://pics.test/" + this.user.profile_pic;
+      this.user.profile_pic_small = "http://pics.test/" + this.user.profile_pic_small;
+    }
+  }
 
 }

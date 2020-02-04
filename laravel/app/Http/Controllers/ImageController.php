@@ -249,6 +249,11 @@ class ImageController extends Controller
 
             $images = $this->convertImages($images);
 
+            if($user->profile_pic){
+                $user->profile_pic = Storage::url($user->profile_pic);
+                $user->profile_pic_small = $user->profile_pic;
+            }
+
             return response()->json([
                 'user'  => $user,
                 'images'    => $images
