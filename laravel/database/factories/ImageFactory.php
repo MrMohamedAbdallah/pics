@@ -21,7 +21,7 @@ $factory->define(App\Image::class, function (Faker $faker) {
     return [
         "title" => $faker->words((rand() % 3) + 1, true),
         "description"   => $faker->paragraph((rand() % 5) + 1),
-        "tags"  => implode(",", $faker->words((rand() % 5) + 1, false)),
+        "tags"  => $faker->words((rand() % 5) + 1, false),
         "image" => $image,
         "image_small" => $image
     ];
