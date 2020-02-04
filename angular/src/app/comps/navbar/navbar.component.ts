@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit {
     this.user = this._auth.user;
     this.getUserImage();
     this.logged = this._auth.isLogged;
+    console.log(this.user);
   }
 
   /**
@@ -35,7 +36,7 @@ export class NavbarComponent implements OnInit {
    */
   toggleMenu(){
     let navbar = this.navbar.nativeElement;
-    console.log("HERE");
+    
 
     if(navbar.classList.contains("show")){
       navbar.classList.remove("show");
@@ -61,6 +62,7 @@ export class NavbarComponent implements OnInit {
   }
 
   getUserImage(){
+    if(! this.user ) return;
     if(this.user.profile_pic && this.user.profile_pic != '/assets/images/user.png'){
       this.user.profile_pic = "http://pics.test/" + this.user.profile_pic;
       this.user.profile_pic_small = "http://pics.test/" + this.user.profile_pic_small;
