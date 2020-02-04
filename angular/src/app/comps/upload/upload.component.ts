@@ -198,5 +198,13 @@ export class UploadComponent implements OnInit, AfterViewInit {
     return this.uploadForm.get(inputName).invalid && this.uploadForm.get(inputName).touched;
   }
 
+  getInputError(inputName: string, error: string){
+    if(!this.uploadForm.get(inputName).touched) return false;
+
+    if(this.uploadForm.get(inputName).errors == null) return false;
+
+    return this.uploadForm.get(inputName).errors[error]; 
+  }
+
 
 }

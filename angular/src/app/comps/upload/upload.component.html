@@ -4,12 +4,24 @@
         <div class="col-6 col-md-12">
           <form class="form" [formGroup]="uploadForm" (ngSubmit)="uploadImage()">
             <div class="form-group">
-              <label form="#title"> <span class="label">Title</span>
+              <label form="#title"> 
+                <span class="label">Title</span>
+                <small class="error">
+                  <span *ngIf="getInputError('title', 'minlength')">Title can't be less than 3 characters long</span>
+                  <span *ngIf="getInputError('title', 'maxlength')">Title can't be long than 50 characters long</span>
+                  <span *ngIf="getInputError('title', 'required')">This field is required</span>
+                </small>
               </label>
               <input type="text" id="title" formControlName="title" [class.invalid]="isNotValid('title')"/>
             </div>
             <div class="form-group">
-              <label form="#title"> <span class="label">Description</span>
+              <label form="#title"> 
+                <span class="label">Description</span>
+                <small class="error">
+                  <span *ngIf="getInputError('description', 'minlength')">Title can't be less than 10 characters long</span>
+                  <span *ngIf="getInputError('description', 'maxlength')">Title can't be long than 200 characters long</span>
+                  <span *ngIf="getInputError('description', 'required')">This field is required</span>
+                </small>
               </label>
               <textarea 
                 name="title" 
