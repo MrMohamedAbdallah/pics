@@ -21,6 +21,7 @@ import { UserComponent } from './comps/user/user.component';
 import { ModalComponent } from './comps/images/modal/modal.component';
 import { ImageService } from './services/image.service';
 import { UploadComponent } from './comps/upload/upload.component';
+import { SettingsComponent } from './comps/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { UploadComponent } from './comps/upload/upload.component';
     UserComponent,
     ModalComponent,
     UploadComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

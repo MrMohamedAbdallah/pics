@@ -9,6 +9,7 @@ import { UserComponent } from './comps/user/user.component';
 import { IsAuthGuard } from './guards/is-auth.guard';
 import { IsNotAuthGuard } from './guards/is-not-auth.guard';
 import { UploadComponent } from './comps/upload/upload.component';
+import { SettingsComponent } from './comps/settings/settings.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: "search/:query", component: SearchComponent},
   {path: "user/:id", component: UserComponent},
   {path: "upload", component: UploadComponent, canActivate: [IsAuthGuard]},
+  {path: "settings", component: SettingsComponent, canActivate: [IsAuthGuard]},
   {path: "404", component: NotFoundComponent},
   {path: "**", redirectTo: "404"},
 ];

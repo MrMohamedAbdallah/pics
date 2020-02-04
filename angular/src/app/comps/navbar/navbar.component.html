@@ -19,7 +19,7 @@
                 <a [routerLink]="['/user', user.id]" routerLinkActive="router-link-active" ><i class="fas fa-user"></i> Profile</a>
               </li>
               <li>
-                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                <a [routerLink]="['/settings']"><i class="fas fa-cog"></i> Settings</a>
               </li>
               <li>
                 <a href="#" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
