@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -170,4 +171,52 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
+
+    
+    /**
+     * Update user info
+     */
+    public function update(Request $request){
+        $user = auth()->user();
+        
+        // Validate the rquest
+        $result = Validator::make($request->all(), [
+            'name'  => 'nullable|min:3|max:15',
+            'email'  => 'nullable|email|unique:users,email,' . $user->id,
+            'website'  => 'nullable|url',
+            'bio'  => 'nullable|min:10|max:200',
+            'profile_pic'   => 'nullable|image|max:2048'
+        ]);
+
+
+        // It fails :(
+        if($result->fails()){
+            return response()->json([
+                'errors'    => $result->errors()
+            ], 400);
+        }
+
+        $filePath = $user->profeil_pic;
+        if($request->profile_pic){
+            $filePath = $request->profile_pic->store('public/images');
+        }
+
+        $user->name = $request->name ? $request->name : $user->name;
+        $user->email = $request->email ? $request->email : $user->email;
+        $user->website = $request->website ? $request->website : $user->website;
+        $user->bio = $request->bio ? $request->bio : $user->bio;
+        $user->profile_pic = $filePath;
+        $user->profile_pic_small = $filePath;
+
+        $user->save();
+
+        if($request->profile_pic){
+            $user->profile_pic = Storage::url($user->profile_pic);
+            $user->profile_pic_small = $user->profile_pic;
+        }
+
+        return response()->json([
+            'user' => $user
+        ], 200);
+    } 
 }

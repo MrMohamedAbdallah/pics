@@ -1,1 +1,47 @@
-<p>settings works!</p>
+<section class="upload">
+    <div class="container">
+      <div class="row">
+        <div class="col-6 col-md-12">
+          <form class="form" [formGroup]="settingsForm">
+            <div class="form-group">
+              <label form="#name"> <span class="label">Name</span>
+              </label>
+              <input type="text" id="name" formControlName="name"/>
+            </div>
+            <div class="form-group">
+              <label form="#email"> <span class="label">Email</span>
+              </label>
+              <input type="text" id="email" formControlName="email"/>
+            </div>
+            <div class="form-group">
+              <label form="#website"> <span class="label">Website</span>
+              </label>
+              <input type="text" id="website" formControlName="website"/>
+            </div>
+            <div class="form-group">
+              <label form="#bio"> <span class="label">bio</span>
+              </label>
+              <textarea name="bio" cols="30" rows="10" id="bio" formControlName="bio"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="col-6 col-md-12"><img class="showcase-img" [src]="user.profile_pic_small"/></div>
+        <div class="col-12">
+          <div class="upload-placeholder">
+            <div class="message">Something to show to the user</div>
+            <div class="box">
+              <h1><i class="fas fa-cloud-upload-alt"></i> Upload Your Photo</h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="progress">
+            <div class="progress-bar"></div>
+          </div>
+        </div>
+        <div class="col-12">
+          <button type="submit">Upload</button>
+        </div>
+      </div>
+    </div>
+  </section>
