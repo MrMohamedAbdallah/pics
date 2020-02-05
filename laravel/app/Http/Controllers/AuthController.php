@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use ImageOptimizer;
 
 class AuthController extends Controller
 {
@@ -202,8 +203,10 @@ class AuthController extends Controller
         }
 
         $filePath = $user->profile_pic;
+        $filePathSmall = $user->profile_pic_small;
         if($request->profile_pic){
             $filePath = $request->profile_pic->store('public/images');
+            $filePathSmall = $this->optimizeImage($filePath);
         }
 
         $user->name = $request->name ? $request->name : $user->name;
@@ -211,7 +214,7 @@ class AuthController extends Controller
         $user->website = $request->website ? $request->website : $user->website;
         $user->bio = $request->bio ? $request->bio : $user->bio;
         $user->profile_pic = $filePath;
-        $user->profile_pic_small = $filePath;
+        $user->profile_pic_small = $filePathSmall;
         
         $user->save();
         
@@ -221,5 +224,17 @@ class AuthController extends Controller
         return response()->json([
             'user' => $user
         ], 200);
-    } 
+    }
+
+
+    /**
+     * Optimzize image
+     */
+    public function optimizeImage($imagePath){
+        $optimizedPath = explode(".", $imagePath);
+        $optimizedPath = $optimizedPath[0] . "_small" . "." . $optimizedPath[1];
+
+        ImageOptimizer::optimize('../storage/app/' . $imagePath, '../storage/app/' .  $optimizedPath);
+        return $optimizedPath;
+    }
 }

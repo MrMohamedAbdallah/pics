@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use ImageOptimizer;
 
 class ImageController extends Controller
 {
@@ -68,12 +69,13 @@ class ImageController extends Controller
 
             // Store the image
             $filePath = $request->image->store(self::STORAGE_PATH);
+            $filePathSmall = $this->optimizeImage($filePath);
 
             // Create new image
             $image = new Image($request->only(['title', 'description', 'tags']));
 
             $image->image = $filePath;
-            $image->image_small = $filePath;
+            $image->image_small = $filePathSmall;
             $image->user_id = auth()->user()->id;
 
             // Save iamge into the database
@@ -147,6 +149,7 @@ class ImageController extends Controller
 
             // Get image file path as a default new file path value
             $filePath = $image->image;
+            $filePathSmall = $image->small;
 
             // Check if the user uploaded new image
             if ($request->file) {
@@ -155,6 +158,7 @@ class ImageController extends Controller
                 Storage::delete($filePath);
                 // Upload the new image
                 $filePath = $request->file->store(self::STORAGE_PATH);
+                $filePathSmall = $this->optimizeImage($filePath);
             }
 
 
@@ -163,7 +167,7 @@ class ImageController extends Controller
                 'description' => $request->description,
                 'tags'  => $request->tags,
                 'image' => $filePath,
-                'image_small'   => $filePath
+                'image_small'   => $filePathSmall
             ]);
 
             // Save changes into database
@@ -251,7 +255,7 @@ class ImageController extends Controller
 
             if($user->profile_pic){
                 $user->profile_pic = Storage::url($user->profile_pic);
-                $user->profile_pic_small = $user->profile_pic;
+                $user->profile_pic_small = Storage::url($user->profile_pic_small);
             }
 
             return response()->json([
@@ -296,5 +300,18 @@ class ImageController extends Controller
             ], 400);
         }
 
+    }
+
+
+    
+    /**
+     * Optimzize image
+     */
+    public function optimizeImage($imagePath){
+        $optimizedPath = explode(".", $imagePath);
+        $optimizedPath = $optimizedPath[0] . "_small" . "." . $optimizedPath[1];
+
+        ImageOptimizer::optimize('../storage/app/' . $imagePath, '../storage/app/' .  $optimizedPath);
+        return $optimizedPath;
     }
 }
