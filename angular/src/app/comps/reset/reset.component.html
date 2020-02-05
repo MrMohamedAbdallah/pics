@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+      <div class="col-8 col-md-12 mx-auto">
+        <form
+          class="form shadow-form"
+          [formGroup]="resetForm"
+          (ngSubmit)="reset()"
+        >
+          <div class="form-group">
+            <label form="#old_password"> 
+                <span class="label">Old Password</span>
+                <small class="error" *ngIf="wrongPassword">Wrong Password</small>
+             </label>
+            <input
+              type="password"
+              id="old_password"
+              formControlName="old_password"
+              [class.invalid]="wrongPassword"
+            />
+          </div>
+          <div class="form-group">
+            <label form="#password"> 
+                <span class="label">New Password</span>
+            </label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+            />
+          </div>
+          <div class="form-group">
+            <label form="#password_confirmation"> <span class="label">Confirm New Password</span> </label>
+            <input
+              type="password"
+              id="password_confirmation"
+              formControlName="password_confirmation"
+            />
+          </div>
+          <div class="form-footer">
+            <button class="submit-btn" type="submit" [disabled]="resetForm.invalid || !matchPasswords()">Change Password</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

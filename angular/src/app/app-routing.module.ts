@@ -10,6 +10,7 @@ import { IsAuthGuard } from './guards/is-auth.guard';
 import { IsNotAuthGuard } from './guards/is-not-auth.guard';
 import { UploadComponent } from './comps/upload/upload.component';
 import { SettingsComponent } from './comps/settings/settings.component';
+import { ResetComponent } from './comps/reset/reset.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: "user/:id", component: UserComponent},
   {path: "upload", component: UploadComponent, canActivate: [IsAuthGuard]},
   {path: "settings", component: SettingsComponent, canActivate: [IsAuthGuard]},
+  {path: "change-password", component: ResetComponent, canActivate: [IsAuthGuard]},
   {path: "404", component: NotFoundComponent},
   {path: "**", redirectTo: "404"},
 ];
