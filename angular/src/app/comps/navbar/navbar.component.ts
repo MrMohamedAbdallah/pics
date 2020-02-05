@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
       this.user = user;
     })
     this.user = this._auth.user;
-    this.getUserImage();
+    // this.getUserImage();
     this.logged = this._auth.isLogged;
     console.log(this.user);
   }
