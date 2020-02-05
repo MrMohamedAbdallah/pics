@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpEventType } from '@angular/common/http';
 
@@ -30,10 +30,10 @@ export class SettingsComponent implements OnInit {
 
 
     this.settingsForm = new FormGroup({
-      name: new FormControl(this.user.name),
-      email: new FormControl(this.user.email),
-      website: new FormControl(this.user.website),
-      bio: new FormControl(this.user.bio),
+      name: new FormControl(this.user.name, {validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15)]}),
+      email: new FormControl(this.user.email, {validators: [Validators.required, Validators.email]}),
+      website: new FormControl(this.user.website, {validators: [Validators.pattern("^(http[s]?:\\/\\/){0,1}(www\\.){0,1}[a-zA-Z0-9\\.\\-]+\\.[a-zA-Z]{2,5}[\\.]{0,1}$")]}),
+      bio: new FormControl(this.user.bio, {validators: [Validators.minLength(10), Validators.maxLength(200)]}),
       pic: new FormControl(null)
     });
   }

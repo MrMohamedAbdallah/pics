@@ -4,24 +4,45 @@
         <div class="col-6 col-md-12">
           <form class="form" [formGroup]="settingsForm">
             <div class="form-group">
-              <label form="#name"> <span class="label">Name</span>
+              <label form="#name"> 
+                  <span class="label">Name</span>
+                  <small class="error">
+                    <span *ngIf="getInputError('name', 'minlength')">Name can't be less than 3 characters long</span>
+                    <span *ngIf="getInputError('name', 'maxlength')">Name can't be long than 15 characters long</span>
+                    <span *ngIf="getInputError('name', 'required')">This field is required</span>
+                  </small>
               </label>
-              <input type="text" id="name" formControlName="name"/>
+              <input type="text" id="name" formControlName="name"  [class.invalid]="isNotValid('name')"/>
             </div>
             <div class="form-group">
-              <label form="#email"> <span class="label">Email</span>
+              <label form="#email"> 
+                  <span class="label">Email</span>
+                    <small class="error">
+                    <span *ngIf="getInputError('email', 'email')">This should be a valid email</span>
+                    <span *ngIf="getInputError('email', 'required')">This field is required</span>
+                    </small>
               </label>
-              <input type="text" id="email" formControlName="email"/>
+              <input type="text" id="email" formControlName="email" [class.invalid]="isNotValid('email')"/>
             </div>
             <div class="form-group">
-              <label form="#website"> <span class="label">Website</span>
+              <label form="#website"> 
+                  <span class="label">Website</span>
+                  <small class="error">
+                    <span *ngIf="getInputError('website', 'pattern')">This field should be a valid URL</span>
+                  </small>
               </label>
-              <input type="text" id="website" formControlName="website"/>
+              <input type="text" id="website" formControlName="website" [class.invalid]="isNotValid('website')"/>
             </div>
             <div class="form-group">
-              <label form="#bio"> <span class="label">bio</span>
+              <label form="#bio"> 
+                  <span class="label">Bio</span>
+                  <small class="error">
+                    <span *ngIf="getInputError('bio', 'minlength')">Title can't be less than 10 characters long</span>
+                    <span *ngIf="getInputError('bio', 'maxlength')">Title can't be long than 200 characters long</span>
+                    <span *ngIf="getInputError('bio', 'required')">This field is required</span>
+                </small>
               </label>
-              <textarea name="bio" cols="30" rows="10" id="bio" formControlName="bio"></textarea>
+              <textarea name="bio" cols="30" rows="10" id="bio" formControlName="bio" [class.invalid]="isNotValid('bio')"></textarea>
             </div>
             <input type="file" accept="image/*" capture="environment" #fileInput style="display: none">
           </form>
@@ -41,7 +62,7 @@
             </div>
           </div>
         <div class="col-12">
-          <button type="submit" (click)="updateSettings()">Upload</button>
+          <button type="submit" (click)="updateSettings()" [disabled]="this.settingsForm.invalid">Upload</button>
         </div>
       </div>
     </div>
