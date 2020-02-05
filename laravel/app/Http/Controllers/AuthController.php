@@ -201,7 +201,7 @@ class AuthController extends Controller
             ], 400);
         }
 
-        $filePath = $user->profeil_pic;
+        $filePath = $user->profile_pic;
         if($request->profile_pic){
             $filePath = $request->profile_pic->store('public/images');
         }
@@ -212,13 +212,11 @@ class AuthController extends Controller
         $user->bio = $request->bio ? $request->bio : $user->bio;
         $user->profile_pic = $filePath;
         $user->profile_pic_small = $filePath;
-
+        
         $user->save();
-
-        if($request->profile_pic){
-            $user->profile_pic = Storage::url($user->profile_pic);
-            $user->profile_pic_small = $user->profile_pic;
-        }
+        
+        $user->profile_pic = Storage::url($user->profile_pic);
+        $user->profile_pic_small = $user->profile_pic;
 
         return response()->json([
             'user' => $user

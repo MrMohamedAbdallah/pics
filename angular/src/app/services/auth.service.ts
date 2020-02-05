@@ -104,8 +104,8 @@ export class AuthService {
    * Convert user image to default iamge picture if the iamge is not set
    */
   convertUser(user){
-    user.profile_pic = user.profile_pic ? user.profile_pic : '/assets/images/user.png';
-    user.profile_pic_small = user.profile_pic_small ? user.profile_pic_small : '/assets/images/user.png';
+    user.profile_pic = user.profile_pic ? "http://pics.test/" + user.profile_pic : '/assets/images/user.png';
+    user.profile_pic_small = user.profile_pic_small ? "http://pics.test/" +  user.profile_pic_small : '/assets/images/user.png';
 
     return user;
   }
@@ -143,6 +143,33 @@ export class AuthService {
    */
   profile(){
     this._router.navigate(['/user', this.user.id]);
+  }
+
+  updateSettings(values: FormData){
+    let headers = new HttpHeaders()
+                  .set("Accept", "application/json")
+                  .set("Authorization", "Bearer " + this.access_token);
+    
+    return this._http.post("http://pics.test/api/update", values, {
+      reportProgress: true,
+      observe: 'events',
+      headers: headers,
+    });
+  }
+
+  updateUser(user: any){
+    this.user = user;
+    if(user.profile_pic){
+      this.user.profile_pic = "http://pics.test/" + user.profile_pic;
+      this.user.profile_pic_small = "http://pics.test/" + user.profile_pic_small;
+    } else {
+      this.user.profile_pic = "/assets/images/user.png";
+      this.user.profile_pic_small = "/assets/images/user.png";
+    }
+    console.log(this.user);
+    localStorage.setItem("user", JSON.stringify(this.user));
+    
+    this.userObserver.emit(this.user);
   }
 
 }

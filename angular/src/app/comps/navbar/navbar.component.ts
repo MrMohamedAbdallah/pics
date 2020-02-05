@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit {
     this._auth.userObserver.subscribe(user => {
       if(user){
         this.logged = true;
-        this.getUserImage();
       } else {
         this.logged = false;
       }
