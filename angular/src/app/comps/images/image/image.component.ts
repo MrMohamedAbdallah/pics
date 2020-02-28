@@ -30,4 +30,18 @@ export class ImageComponent implements OnInit {
     this._imageService.showModal.emit(this.image);
   }
 
+  download(e){
+    e.preventDefault();
+
+    
+      let a = document.createElement("a");
+      let url = "http://pics.test/api/download/" + this.image.id
+      a.href = url;
+      a.download = url;
+      // start download
+      a.click();
+    
+  }
+
+
 }

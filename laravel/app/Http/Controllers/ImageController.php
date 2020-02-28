@@ -19,7 +19,7 @@ class ImageController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['index', 'show', 'user', 'search']]);
+        $this->middleware('auth:api', ['except' => ['index', 'show', 'user', 'search', 'download']]);
     }
 
 
@@ -313,5 +313,12 @@ class ImageController extends Controller
 
         ImageOptimizer::optimize('../storage/app/' . $imagePath, '../storage/app/' .  $optimizedPath);
         return $optimizedPath;
+    }
+
+    /**
+     * Download the requested image
+     */
+    public function download(Image $image){
+        return Storage::download($image->image);
     }
 }

@@ -27,17 +27,14 @@ export class ModalComponent implements OnInit {
   download(e){
     e.preventDefault();
 
-    this._http.get(this.image.image, {
-      responseType: 'blob'
-    }).subscribe((res: any)=>{
-          let a = document.createElement("a");
-          a.href = URL.createObjectURL(res.blob());
-          a.download = this.image.image;
-          // start download
-          a.click();
-    }, ()=>{
-      console.log("sadf");
-    });
+    
+      let a = document.createElement("a");
+      let url = "http://pics.test/api/download/" + this.image.id
+      a.href = url;
+      a.download = url;
+      // start download
+      a.click();
+    
   }
 
 }

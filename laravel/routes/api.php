@@ -32,3 +32,6 @@ Route::group([
     Route::post('me', 'AuthController@me');
 });
 Route::post('update', 'AuthController@update');
+
+// Download the file
+Route::get('download/{image}', 'ImageController@download');
