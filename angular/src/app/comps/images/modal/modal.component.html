@@ -16,15 +16,15 @@
               </div>
               <a
                 class="download-btn"
-                download="download"
-                [href]="image.image"
+                download
+                (click)="download($event)"
                 >Download <i class="fas fa-cloud-download-alt"></i
               ></a>
             </div>
             <img class="modal-img" [src]="image.image" />
             <div class="modal-footer">
               <ul class="modal-tags">
-                <li *ngFor="let tag of image.tags"><a href="#">{{ tag }}</a></li>
+                <li *ngFor="let tag of image.tags"><a [routerLink]="['/search', tag]">{{ tag }}</a></li>
               </ul>
               <p class="description">{{ image.description }}</p>
             </div>
