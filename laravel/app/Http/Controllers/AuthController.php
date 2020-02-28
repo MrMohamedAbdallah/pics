@@ -184,13 +184,12 @@ class AuthController extends Controller
      */
     public function update(Request $request){
         $user = auth()->user();
-        
         // Validate the rquest
         $result = Validator::make($request->all(), [
             'name'  => 'nullable|min:3|max:15',
             'email'  => 'nullable|email|unique:users,email,' . $user->id,
-            'website'  => 'nullable|url',
-            'bio'  => 'nullable|min:10|max:200',
+            'website'  => 'nullable|string|url',
+            'bio'  => 'nullable|string|min:10|max:200',
             'profile_pic'   => 'nullable|image|max:2048'
         ]);
 

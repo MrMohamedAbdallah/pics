@@ -76,8 +76,12 @@ export class SettingsComponent implements OnInit {
 
     fd.append('name', value.name);
     fd.append('email', value.email);
-    fd.append('website', value.website);
-    fd.append('bio', value.bio);
+    if(value.website){
+      fd.append('website', value.website);
+    }
+    if(value.bio){
+      fd.append('bio', value.bio);
+    }
     if(value.pic && !this.uploadFileError){
       fd.append('profile_pic', value.pic);
     }
