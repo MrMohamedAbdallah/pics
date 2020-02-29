@@ -88,7 +88,7 @@ class AuthController extends Controller
     {
         $user = auth()->user();
         if($user->profile_pic){
-            $user->profile_pic = Storage::url($user->profile_pic);
+            $user->profile_pic = asset(Storage::url($user->profile_pic));
             $user->profile_pic_small = $user->profile_pic;
         }
         return response()->json($user);
@@ -217,7 +217,7 @@ class AuthController extends Controller
         
         $user->save();
         
-        $user->profile_pic = Storage::url($user->profile_pic);
+        $user->profile_pic = asset(Storage::url($user->profile_pic));
         $user->profile_pic_small = $user->profile_pic;
 
         return response()->json([

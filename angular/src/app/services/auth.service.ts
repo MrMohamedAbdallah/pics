@@ -15,14 +15,11 @@ export class AuthService {
 
   constructor(private _http: HttpClient, private _router: Router) {
     this.access_token = localStorage.getItem("access_token");
-    this.expire = parseInt(localStorage.getItem("expire"));
 
     if (this.access_token) {
-      if (this.expire < Date.now()) {
         this.isLogged = true;
         this.user = JSON.parse(localStorage.getItem("user"));
         this.userObserver.emit(this.user);
-      }
     }
   }
 
@@ -60,9 +57,7 @@ export class AuthService {
    * @param token string
    * @param expire string
    */
-  storeToken(token, expire) {
-    expire = Date.now() + parseInt(expire);
-
+  storeToken(token, expire) {    
     // Store in localstorage
     localStorage.setItem("access_token", token);
     localStorage.setItem("expire", expire);
@@ -99,8 +94,6 @@ export class AuthService {
           this.userObserver.emit(this.user);
           // Store user information on the localstorage
           localStorage.setItem("user", JSON.stringify(this.user));
-
-          console.log(this.user);
         },
         err => {
           console.error("Get user information error");
@@ -114,10 +107,10 @@ export class AuthService {
    */
   convertUser(user) {
     user.profile_pic = user.profile_pic
-      ? "http://pics.test/" + user.profile_pic
+      ? user.profile_pic
       : "/assets/images/user.png";
     user.profile_pic_small = user.profile_pic_small
-      ? "http://pics.test/" + user.profile_pic_small
+      ? user.profile_pic_small
       : "/assets/images/user.png";
 
     return user;
@@ -173,14 +166,12 @@ export class AuthService {
   updateUser(user: any) {
     this.user = user;
     if (user.profile_pic) {
-      this.user.profile_pic = "http://pics.test/" + user.profile_pic;
-      this.user.profile_pic_small =
-        "http://pics.test/" + user.profile_pic_small;
+      this.user.profile_pic =  user.profile_pic;
+      this.user.profile_pic_small = user.profile_pic_small;
     } else {
       this.user.profile_pic = "/assets/images/user.png";
       this.user.profile_pic_small = "/assets/images/user.png";
     }
-    console.log(this.user);
     localStorage.setItem("user", JSON.stringify(this.user));
 
     this.userObserver.emit(this.user);

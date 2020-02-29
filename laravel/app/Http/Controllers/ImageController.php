@@ -12,6 +12,7 @@ use ImageOptimizer;
 
 class ImageController extends Controller
 {
+    protected $convertedUsers = [];
     /**
      * @var string Upload images path
      */
@@ -221,13 +222,15 @@ class ImageController extends Controller
     {
 
         // Get the path of the image
-        $image->image = Storage::url($image->image);
-        $image->image_small = Storage::url($image->image_small);
+        $image->image = asset(Storage::url($image->image));
+        $image->image_small = asset(Storage::url($image->image_small));
 
         // Get the full path for the user image if it exists
-        if ($image->user && $image->user->profile_pic) {
-            $image->user->profile_pic = Storage::url($image->user->profile_pic);
-            $image->user->profile_pic_small = Storage::url($image->user->profile_pic_small);
+        if ( !in_array($image->user->id, $this->convertedUsers) && $image->user && $image->user->profile_pic) {
+            $image->user->profile_pic = asset(Storage::url($image->user->profile_pic));
+            $image->user->profile_pic_small = asset(Storage::url($image->user->profile_pic_small));
+
+            $this->convertedUsers[] =$image->user->id;
         }
 
         return $image;
@@ -249,14 +252,16 @@ class ImageController extends Controller
             $user = User::findOrFail($id);
 
             // Get iamges
-            $images = $user->images()->paginate();
-
-            $images = $this->convertImages($images);
-
+            
+            
             if($user->profile_pic){
-                $user->profile_pic = Storage::url($user->profile_pic);
-                $user->profile_pic_small = Storage::url($user->profile_pic_small);
+                $user->profile_pic = asset(Storage::url($user->profile_pic));
+                $user->profile_pic_small = asset(Storage::url($user->profile_pic_small));
             }
+            
+            $images = $user->images()->with("user")->paginate();
+            $images = $this->convertImages($images);
+            
 
             return response()->json([
                 'user'  => $user,

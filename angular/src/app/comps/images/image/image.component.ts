@@ -15,10 +15,10 @@ export class ImageComponent implements OnInit {
   constructor(private _elem: ElementRef, private _imageService: ImageService) { }
 
   ngOnInit() {
-    this.image.image_small = "http://pics.test/" + this.image.image_small;
-    this.image.image = "http://pics.test/" + this.image.image;
+    this.image.image_small = this.image.image_small;
+    this.image.image = this.image.image;
 
-    this.image.user.profile_pic_small = this.image.user.profile_pic_small ? "http://pics.test/" + this.image.user.profile_pic_small : "/assets/images/user.png";
+    this.image.user.profile_pic_small = this.image.user.profile_pic_small ? this.image.user.profile_pic_small : "/assets/images/user.png";
 
     this.img.nativeElement.onload = ()=>{
       this.loaded.emit(this._elem.nativeElement);

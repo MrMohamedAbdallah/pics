@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
 
   getUser(user){
     this.user = user;
-    this.user.profile_pic_small = this.user.profile_pic_small ? "http://pics.test/" + this.user.profile_pic_small : "/assets/images/user.png";
+    this.user.profile_pic_small = this.user.profile_pic_small ? this.user.profile_pic_small : "/assets/images/user.png";
   }
 
 }

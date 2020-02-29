@@ -114,7 +114,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
       div.appendChild(img);
       this.colc.append(div); // Appending the image container to the grid
     };
-    img.src = "http://pics.test/" + image.image_small; // Assign the source of the image to the url
+    img.src = image.image_small; // Assign the source of the image to the url
   }
 
   createDiv(className = "") {
