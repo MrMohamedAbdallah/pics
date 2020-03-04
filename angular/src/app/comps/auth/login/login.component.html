@@ -30,7 +30,12 @@
           />
         </div>
         <div class="form-footer">
-          <button class="submit-btn" type="submit" [disabled]="loginForm.invalid">Login</button
+          <button class="submit-btn" type="submit" [disabled]="loginForm.invalid || loading">
+            <span *ngIf="!loading">Login</span>
+              <span *ngIf="loading">
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+              </span>  
+          </button
           ><span class="message"
             >Don't have an account? <a routerLink="/register">Register</a></span
           >

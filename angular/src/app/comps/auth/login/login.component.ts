@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit {
 
   lastEmail: string = null;
   lastPassword: string = null;
+
+  loading: boolean = false;
+
   constructor(private _auth: AuthService) { }
 
   ngOnInit() {
@@ -37,6 +40,7 @@ export class LoginComponent implements OnInit {
     this.lastEmail = email;
     this.lastPassword = password;
 
+    this.loading = true;
     this._auth.login(email, password).subscribe(
       (data: any)=>{
         this._auth.storeToken(data.access_token, data.expires_in);
@@ -46,6 +50,10 @@ export class LoginComponent implements OnInit {
           this.wrongInfo = true;
         }
         console.log(err);
+        this.loading = false;
+      },
+      ()=>{
+        this.loading = false;
       });
   }
 

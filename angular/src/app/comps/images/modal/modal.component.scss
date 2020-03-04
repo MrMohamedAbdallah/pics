@@ -1,3 +1,16 @@
 .user-info{
     max-width: 300px;
 }
+
+.btn-group{
+    display: flex;
+    & > * {
+        margin-left: 10px;
+    }
+    .delete{
+        background-color: #ff5d5d;
+        &:hover{
+            background-color: darken(#ff5d5d, 10);
+        }
+    }
+}

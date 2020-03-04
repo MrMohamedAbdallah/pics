@@ -7,6 +7,7 @@
   class="grid-item img-card"
   *ngFor="let image of imagesArray; let i = index" 
   [image]="image"
+  [index]="i"
   (loaded)="load($event)"></app-image>
 
 <div *ngIf="searched && imagesArray.length == 0">
@@ -32,4 +33,4 @@
 </div>
 
 <!-- Modal -->
-<app-modal></app-modal>
+<app-modal (delete)="deleteImage($event)"></app-modal>

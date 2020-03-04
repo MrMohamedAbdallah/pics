@@ -10,6 +10,7 @@ export class ImageComponent implements OnInit {
   @ViewChild("img", {static: true}) img: ElementRef;
   @ViewChild("gridItem", {static: true}) gridItem: ElementRef;
   @Input("image") image: any;
+  @Input("index") index: number;
   @Output("loaded") loaded: EventEmitter<any> = new EventEmitter<any>();
   imgLoaded: boolean = false;
   constructor(private _elem: ElementRef, private _imageService: ImageService) { }
@@ -27,7 +28,11 @@ export class ImageComponent implements OnInit {
   }
 
   imgClicked(){
-    this._imageService.showModal.emit(this.image);
+
+    this._imageService.showModal.emit({
+      img: this.image,
+      index: this.index
+    });
   }
 
   download(e){

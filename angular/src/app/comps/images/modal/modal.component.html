@@ -14,12 +14,21 @@
                     [routerLink]="['/user', image.user.id]"
                     >{{ image.user.name }}</a>
               </div>
-              <a
+              <div class="btn-group">
+                
+                <span 
+                  class="download-btn delete bg-danger" 
+                  (click)="delete()"
+                  *ngIf="user && image.user.id == user.id">Delete</span>
+
+                
+                <a
                 class="download-btn"
                 download
                 (click)="download($event)"
                 >Download <i class="fas fa-cloud-download-alt"></i
-              ></a>
+                  ></a>
+                </div>
             </div>
             <img class="modal-img" [src]="image.image" />
             <div class="modal-footer">

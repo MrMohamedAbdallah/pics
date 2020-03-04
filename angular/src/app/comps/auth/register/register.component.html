@@ -29,7 +29,12 @@
             <input type="password" placeholder="" id="confirm_password" formControlName="password_confirmation"/>
           </div>
           <div class="form-footer">
-            <button class="submit-btn" type="submit" [disabled]="!registerForm.valid || !checkPassword() ">Register</button>
+            <button class="submit-btn" type="submit" [disabled]="!registerForm.valid || !checkPassword() || loading">
+              <span *ngIf="!loading">Register</span>
+              <span *ngIf="loading">
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+              </span>
+            </button>
             <span class="message">
               have an account? <a routerLink="/login">Login</a>
             </span>

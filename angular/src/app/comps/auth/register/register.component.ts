@@ -12,6 +12,8 @@ export class RegisterComponent implements OnInit {
   emailIsUsed: boolean = false; // If the email is used or not
   lastEmail: string = null;
 
+  loading: boolean = false;
+
   constructor(private _auth: AuthService) { }
 
   ngOnInit() {
@@ -40,6 +42,7 @@ export class RegisterComponent implements OnInit {
 
     this.lastEmail = email;
 
+    this.loading = true;
     this._auth.register(email, name, password, password_confirmation).subscribe(
       (data: any)=>{
         this._auth.storeToken(data.access_token, data.expires_in);
@@ -50,6 +53,10 @@ export class RegisterComponent implements OnInit {
             this.emailIsUsed = true;
           }
         }
+        this.loading = false;
+      },
+      ()=> {
+        this.loading = false;
       }
     );
 

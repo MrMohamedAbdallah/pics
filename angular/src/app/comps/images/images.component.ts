@@ -129,4 +129,8 @@ export class ImagesComponent implements OnInit, AfterViewInit {
   }
 
 
+  deleteImage(index: number){
+    this.imagesArray.splice(index, 1);
+  }
+
 }
