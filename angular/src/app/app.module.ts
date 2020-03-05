@@ -24,6 +24,10 @@ import { UploadComponent } from './comps/upload/upload.component';
 import { SettingsComponent } from './comps/settings/settings.component';
 import { ResetComponent } from './comps/reset/reset.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +51,9 @@ import { ResetComponent } from './comps/reset/reset.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [AuthService, ImageService],
   bootstrap: [AppComponent]
