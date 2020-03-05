@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-reset',
@@ -13,7 +14,7 @@ export class ResetComponent implements OnInit {
 
   wrongPassword: boolean = false;
 
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService, private _msgService: MessagesService) { }
 
   ngOnInit() {
     this.resetForm = new FormGroup({
@@ -30,6 +31,7 @@ export class ResetComponent implements OnInit {
   reset(){
     this._auth.resetPassword(this.resetForm.value).subscribe(
       ()=>{
+        this._msgService.success("Congratulation", "Your password updated successfully");
         this._auth.profile();
       },
       (err)=>{

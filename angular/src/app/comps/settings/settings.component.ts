@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpEventType } from '@angular/common/http';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-settings',
@@ -20,7 +21,7 @@ export class SettingsComponent implements OnInit {
   uploadFileError: string = null;
   uploading: boolean = false; // Upload status
 
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService, private _msgService: MessagesService) { }
 
   ngOnInit() {
     this._auth.userObserver.subscribe(user => {
@@ -95,6 +96,9 @@ export class SettingsComponent implements OnInit {
                   this.progressValue((event.loaded / event.total) * 100);
                 } else if(event.type == HttpEventType.Response){
                     this._auth.updateUser(event.body.user);
+
+                    this._msgService.success("Congratulation", "Your settings updated successfully");
+
                     this._auth.profile();
                   }
               }, console.error);

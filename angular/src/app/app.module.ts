@@ -26,6 +26,7 @@ import { ResetComponent } from './comps/reset/reset.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { MessagesService } from './services/messages.service';
 
 
 @NgModule({
@@ -53,9 +54,9 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot(), // ToastrModule added
   ],
-  providers: [AuthService, ImageService],
+  providers: [AuthService, ImageService, MessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

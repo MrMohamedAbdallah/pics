@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpEventType } from '@angular/common/http';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-upload',
@@ -22,7 +23,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   tagsError: string = null;
   uploading: boolean = false; // Upload status
 
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService, private _msgService: MessagesService) { }
 
   ngOnInit() {
     this.uploadForm = new FormGroup({
@@ -166,12 +167,14 @@ export class UploadComponent implements OnInit, AfterViewInit {
       ((event)=>{
         if(event.type == HttpEventType.UploadProgress){
           this.uploading = true;
-          console.log(this);
           this.progressValue((event.loaded / event.total) * 100);
         } else if (event.type == HttpEventType.Response){
           this.uploading = false;
+          // Show sucess message
+          this._msgService.success("Congratulation", "Your image uploaded successfully");
           // Redirect the user to the profile
           this._auth.profile();
+
         }
       }).bind(this),
       console.error
