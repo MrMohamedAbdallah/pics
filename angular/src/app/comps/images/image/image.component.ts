@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { ImageService } from 'src/app/services/image.service';
 
+import { environment } from "../../../../environments/environment";
+
 @Component({
   selector: 'app-image',
   templateUrl: './image.component.html',
@@ -40,7 +42,7 @@ export class ImageComponent implements OnInit {
 
     
       let a = document.createElement("a");
-      let url = "http://pics.test/api/download/" + this.image.id
+      let url = environment.url + "/api/download/" + this.image.id
       a.href = url;
       a.download = url;
       // start download

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
+import { environment } from "../../../environments/environment";
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -62,8 +64,8 @@ export class NavbarComponent implements OnInit {
   getUserImage(){
     if(! this.user ) return;
     if(this.user.profile_pic && this.user.profile_pic != '/assets/images/user.png'){
-      this.user.profile_pic = "http://pics.test/" + this.user.profile_pic;
-      this.user.profile_pic_small = "http://pics.test/" + this.user.profile_pic_small;
+      this.user.profile_pic = environment.url + '/' + this.user.profile_pic;
+      this.user.profile_pic_small = environment.url + '/' + this.user.profile_pic_small;
     }
   }
 

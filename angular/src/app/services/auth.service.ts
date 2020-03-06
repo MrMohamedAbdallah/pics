@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { environment } from "../../environments/environment"
 
 @Injectable({
   providedIn: "root"
@@ -26,7 +27,7 @@ export class AuthService {
   login(email: string, password: string) {
     let headers = new HttpHeaders().set("Accept", "application/json");
     return this._http.post(
-      "http://pics.test/api/auth/login",
+      environment.url + "api/auth/login",
       {
         email: email,
         password: password
@@ -39,7 +40,7 @@ export class AuthService {
     let headers = new HttpHeaders().set("Accept", "application/json");
 
     return this._http.post(
-      "http://pics.test/api/auth/register",
+      environment.url + "api/auth/register",
       {
         email,
         name,
@@ -87,7 +88,7 @@ export class AuthService {
       .set("Authorization", "Bearer " + this.access_token);
 
     this._http
-      .post("http://pics.test/api/auth/me", {}, { headers: headers })
+      .post(environment.url + "api/auth/me", {}, { headers: headers })
       .subscribe(
         user => {
           this.user = this.convertUser(user);
@@ -137,7 +138,7 @@ export class AuthService {
       .set("Accept", "application/json")
       .set("Authorization", "Bearer " + this.access_token);
 
-    return this._http.post("http://pics.test/api/images", values, {
+    return this._http.post(environment.url + "api/images", values, {
       reportProgress: true,
       observe: "events",
       headers: headers
@@ -156,7 +157,7 @@ export class AuthService {
       .set("Accept", "application/json")
       .set("Authorization", "Bearer " + this.access_token);
 
-    return this._http.post("http://pics.test/api/update", values, {
+    return this._http.post(environment.url + "api/update", values, {
       reportProgress: true,
       observe: "events",
       headers: headers
@@ -182,7 +183,7 @@ export class AuthService {
       .set("Accept", "application/json")
       .set("Authorization", "Bearer " + this.access_token);
 
-    return this._http.post("http://pics.test/api/auth/password", values, {
+    return this._http.post(environment.url + "api/auth/password", values, {
       headers: headers
     });
   }
