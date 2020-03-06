@@ -10,7 +10,7 @@
 
 3. Run this command for storage configuration in larvel.
     ```bash
-    php artisan storage:linke
+    php artisan storage:link
     ``` 
 
 4. Add [algolia](https://www.algolia.com/) app key and secret to the `.env` file.
