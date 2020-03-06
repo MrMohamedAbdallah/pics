@@ -10,13 +10,14 @@
 
 3. Run this command for storage configuration in larvel.
     ```bash
-    php artisan storage:linke
+    php artisan storage:link
     ``` 
 
 4. Add [algolia](https://www.algolia.com/) app key and secret to the `.env` file.
 
 5. Import `images` table data into Alogila app folowing this [guide](https://www.algolia.com/doc/framework-integration/laravel/indexing/import-into-algolia/?language=php).
 
+6. Set the value of `url` variable in angular `environment.ts` file to your backend base URL
 
 **What I learned from it 😊**
 * Using Angular with Laravel
