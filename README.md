@@ -48,7 +48,10 @@ _all text are lorem ipsum_
 ![Underground logo](design/logo.jpg)
 
 #### **Home**
-![Home Page](design/Home.jpg)
+![Home Page](design/home.jpg)
+
+#### **Profile**
+![Profile Page](design/profile.jpg)
 
 #### **Search**
 ![search](design/search.jpg)
